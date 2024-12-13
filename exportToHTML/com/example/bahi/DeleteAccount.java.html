@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>DeleteAccount.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DeleteAccount.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AlertDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">.</span><span class="s1">databinding</span><span class="s2">.</span><span class="s1">ActivityDeleteAccountBinding</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">.</span><span class="s1">databinding</span><span class="s2">.</span><span class="s1">ProgressDialogBinding</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">OnFailureListener</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">OnSuccessListener</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseAuth</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseUser</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DataSnapshot</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DatabaseError</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DatabaseReference</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">FirebaseDatabase</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">ValueEventListener</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">DeleteAccount </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s2">{</span>
+
+    <span class="s0">private </span><span class="s1">ActivityDeleteAccountBinding binding</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String TAG </span><span class="s2">= </span><span class="s3">&quot;DELETE_ACCOUNT_TAG&quot;</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">AlertDialog progressDialog</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseAuth firebaseAuth</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseUser firebaseUser</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+
+        <span class="s4">// Initialize the binding properly</span>
+        <span class="s1">binding </span><span class="s2">= </span><span class="s1">ActivityDeleteAccountBinding</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">getLayoutInflater</span><span class="s2">());</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">binding</span><span class="s2">.</span><span class="s1">getRoot</span><span class="s2">());</span>
+
+        <span class="s4">// Initialize Firebase Auth and User</span>
+        <span class="s1">firebaseAuth </span><span class="s2">= </span><span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s1">firebaseUser </span><span class="s2">= </span><span class="s1">firebaseAuth</span><span class="s2">.</span><span class="s1">getCurrentUser</span><span class="s2">();</span>
+
+        <span class="s4">// Handle delete button click</span>
+        <span class="s1">binding</span><span class="s2">.</span><span class="s1">confirmDelete</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">View</span><span class="s2">.</span><span class="s1">OnClickListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick</span><span class="s2">(</span><span class="s1">View v</span><span class="s2">) {</span>
+                <span class="s1">deleteAccount</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showProgressDialog</span><span class="s2">(</span><span class="s1">String message</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">progressDialog </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">AlertDialog</span><span class="s2">.</span><span class="s1">Builder builder </span><span class="s2">= </span><span class="s0">new </span><span class="s1">AlertDialog</span><span class="s2">.</span><span class="s1">Builder</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+            <span class="s1">ProgressDialogBinding dialogBinding </span><span class="s2">= </span><span class="s1">ProgressDialogBinding</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">LayoutInflater</span><span class="s2">.</span><span class="s1">from</span><span class="s2">(</span><span class="s0">this</span><span class="s2">));</span>
+            <span class="s1">builder</span><span class="s2">.</span><span class="s1">setView</span><span class="s2">(</span><span class="s1">dialogBinding</span><span class="s2">.</span><span class="s1">getRoot</span><span class="s2">());</span>
+            <span class="s1">progressDialog </span><span class="s2">= </span><span class="s1">builder</span><span class="s2">.</span><span class="s1">create</span><span class="s2">();</span>
+            <span class="s1">progressDialog</span><span class="s2">.</span><span class="s1">setCancelable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">progressDialog</span><span class="s2">.</span><span class="s1">isShowing</span><span class="s2">()) {</span>
+            <span class="s1">progressDialog</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s1">ProgressDialogBinding dialogBinding </span><span class="s2">= </span><span class="s1">ProgressDialogBinding</span><span class="s2">.</span><span class="s1">bind</span><span class="s2">(</span><span class="s1">progressDialog</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">progress_layout</span><span class="s2">));</span>
+        <span class="s1">dialogBinding</span><span class="s2">.</span><span class="s1">progressText</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">message</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">dismissProgressDialog</span><span class="s2">() {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">progressDialog </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">progressDialog</span><span class="s2">.</span><span class="s1">isShowing</span><span class="s2">()) {</span>
+            <span class="s1">progressDialog</span><span class="s2">.</span><span class="s1">dismiss</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">deleteAccount</span><span class="s2">() {</span>
+        <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s1">TAG</span><span class="s2">, </span><span class="s3">&quot;deleteAccount: &quot;</span><span class="s2">);</span>
+        <span class="s1">showProgressDialog</span><span class="s2">(</span><span class="s3">&quot;Deleting User Account...&quot;</span><span class="s2">);</span>
+
+        <span class="s1">firebaseUser</span><span class="s2">.</span><span class="s1">delete</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">OnSuccessListener</span><span class="s2">&lt;</span><span class="s1">Void</span><span class="s2">&gt;() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onSuccess</span><span class="s2">(</span><span class="s1">Void unused</span><span class="s2">) {</span>
+                        <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s1">TAG</span><span class="s2">, </span><span class="s3">&quot;onSuccess: Account deleted&quot;</span><span class="s2">);</span>
+                        <span class="s1">deleteUserAds</span><span class="s2">();</span>
+                    <span class="s2">}</span>
+                <span class="s2">})</span>
+                <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">OnFailureListener</span><span class="s2">() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onFailure</span><span class="s2">(</span><span class="s1">@NonNull Exception e</span><span class="s2">) {</span>
+                        <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s1">TAG</span><span class="s2">, </span><span class="s3">&quot;onFailure: &quot;</span><span class="s2">, </span><span class="s1">e</span><span class="s2">);</span>
+                        <span class="s1">dismissProgressDialog</span><span class="s2">();</span>
+                        <span class="s1">Utils</span><span class="s2">.</span><span class="s1">toast</span><span class="s2">(</span><span class="s1">DeleteAccount</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Failed to delete account due to &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+                    <span class="s2">}</span>
+                <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">deleteUserAds</span><span class="s2">() {</span>
+        <span class="s1">showProgressDialog</span><span class="s2">(</span><span class="s3">&quot;Deleting User Ads...&quot;</span><span class="s2">);</span>
+        <span class="s1">DatabaseReference refUserAds </span><span class="s2">= </span><span class="s1">FirebaseDatabase</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getReference</span><span class="s2">(</span><span class="s3">&quot;Ads&quot;</span><span class="s2">);</span>
+        <span class="s1">refUserAds</span><span class="s2">.</span><span class="s1">orderByChild</span><span class="s2">(</span><span class="s3">&quot;uid&quot;</span><span class="s2">).</span><span class="s1">equalTo</span><span class="s2">(</span><span class="s1">firebaseAuth</span><span class="s2">.</span><span class="s1">getUid</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">addListenerForSingleValueEvent</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ValueEventListener</span><span class="s2">() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onDataChange</span><span class="s2">(</span><span class="s1">@NonNull DataSnapshot snapshot</span><span class="s2">) {</span>
+                        <span class="s0">for </span><span class="s2">(</span><span class="s1">DataSnapshot ds </span><span class="s2">: </span><span class="s1">snapshot</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">()) {</span>
+                            <span class="s1">ds</span><span class="s2">.</span><span class="s1">getRef</span><span class="s2">().</span><span class="s1">removeValue</span><span class="s2">();</span>
+                        <span class="s2">}</span>
+                        <span class="s1">deleteUserData</span><span class="s2">();</span>
+                    <span class="s2">}</span>
+
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onCancelled</span><span class="s2">(</span><span class="s1">@NonNull DatabaseError error</span><span class="s2">) {</span>
+                        <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s1">TAG</span><span class="s2">, </span><span class="s3">&quot;onCancelled: Failed to delete ads&quot;</span><span class="s2">, </span><span class="s1">error</span><span class="s2">.</span><span class="s1">toException</span><span class="s2">());</span>
+                        <span class="s1">dismissProgressDialog</span><span class="s2">();</span>
+                    <span class="s2">}</span>
+                <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">deleteUserData</span><span class="s2">() {</span>
+        <span class="s1">showProgressDialog</span><span class="s2">(</span><span class="s3">&quot;Deleting User Data...&quot;</span><span class="s2">);</span>
+        <span class="s1">DatabaseReference refUsers </span><span class="s2">= </span><span class="s1">FirebaseDatabase</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getReference</span><span class="s2">(</span><span class="s3">&quot;Users&quot;</span><span class="s2">);</span>
+        <span class="s1">refUsers</span><span class="s2">.</span><span class="s1">child</span><span class="s2">(</span><span class="s1">firebaseAuth</span><span class="s2">.</span><span class="s1">getUid</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">removeValue</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">OnSuccessListener</span><span class="s2">&lt;</span><span class="s1">Void</span><span class="s2">&gt;() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onSuccess</span><span class="s2">(</span><span class="s1">Void unused</span><span class="s2">) {</span>
+                        <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s1">TAG</span><span class="s2">, </span><span class="s3">&quot;onSuccess: User data deleted...&quot;</span><span class="s2">);</span>
+                        <span class="s1">dismissProgressDialog</span><span class="s2">();</span>
+                        <span class="s1">startLogIn</span><span class="s2">();</span>
+                    <span class="s2">}</span>
+                <span class="s2">})</span>
+                <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">OnFailureListener</span><span class="s2">() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onFailure</span><span class="s2">(</span><span class="s1">@NonNull Exception e</span><span class="s2">) {</span>
+                        <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s1">TAG</span><span class="s2">, </span><span class="s3">&quot;onFailure: &quot;</span><span class="s2">, </span><span class="s1">e</span><span class="s2">);</span>
+                        <span class="s1">dismissProgressDialog</span><span class="s2">();</span>
+                        <span class="s1">Utils</span><span class="s2">.</span><span class="s1">toast</span><span class="s2">(</span><span class="s1">DeleteAccount</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Failed to delete user data due to &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+                    <span class="s2">}</span>
+                <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">startLogIn</span><span class="s2">() {</span>
+        <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s1">TAG</span><span class="s2">, </span><span class="s3">&quot;startLogIn: &quot;</span><span class="s2">);</span>
+        <span class="s1">startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">class</span><span class="s2">));</span>
+        <span class="s1">finishAffinity</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBackPressed</span><span class="s2">() {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onBackPressed</span><span class="s2">();</span>
+        <span class="s1">startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">class</span><span class="s2">));</span>
+        <span class="s1">finishAffinity</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

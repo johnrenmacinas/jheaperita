@@ -1,0 +1,417 @@
+<html>
+<head>
+<title>Register.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Register.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">DatePickerDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">ProgressDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.</span><span class="s1">Uri</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">textfield</span><span class="s2">.</span><span class="s1">TextInputEditText</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseAuth</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseUser</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DatabaseReference</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">FirebaseDatabase</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">storage</span><span class="s2">.</span><span class="s1">FirebaseStorage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">storage</span><span class="s2">.</span><span class="s1">StorageReference</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">ParseException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">SimpleDateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">Register </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s2">{</span>
+
+    <span class="s1">TextInputEditText fullName</span><span class="s2">, </span><span class="s1">email</span><span class="s2">, </span><span class="s1">phone</span><span class="s2">, </span><span class="s1">birthday</span><span class="s2">, </span><span class="s1">password</span><span class="s2">, </span><span class="s1">confirmPassword</span><span class="s2">;</span>
+    <span class="s1">TextView textTermsConditions</span><span class="s2">;</span>
+    <span class="s1">Button registerClick</span><span class="s2">, </span><span class="s1">gotoLogin</span><span class="s2">, </span><span class="s1">uploadImageButton</span><span class="s2">;</span>
+    <span class="s1">FirebaseAuth fAuth</span><span class="s2">;</span>
+    <span class="s1">DatabaseReference databaseReference</span><span class="s2">;</span>
+    <span class="s1">CheckBox asLandlord</span><span class="s2">, </span><span class="s1">asTenant</span><span class="s2">, </span><span class="s1">termsConditions</span><span class="s2">;</span>
+    <span class="s1">ProgressBar progressBar</span><span class="s2">;</span>
+    <span class="s1">RadioButton female</span><span class="s2">, </span><span class="s1">male</span><span class="s2">;</span>
+    <span class="s1">ImageView profilePicPreview</span><span class="s2">;</span>
+    <span class="s1">Uri selectedImageUri</span><span class="s2">;</span>
+    <span class="s1">StorageReference storageRef</span><span class="s2">;</span>
+    <span class="s1">DatePickerDialog picker</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_register</span><span class="s2">);</span>
+
+        <span class="s1">initializeFields</span><span class="s2">();</span>
+        <span class="s1">setupListeners</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">initializeFields</span><span class="s2">() {</span>
+        <span class="s1">fAuth </span><span class="s2">= </span><span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s1">databaseReference </span><span class="s2">= </span><span class="s1">FirebaseDatabase</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getReference</span><span class="s2">(</span><span class="s3">&quot;Users&quot;</span><span class="s2">);</span>
+        <span class="s1">storageRef </span><span class="s2">= </span><span class="s1">FirebaseStorage</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getReference</span><span class="s2">(</span><span class="s3">&quot;ProfileImages&quot;</span><span class="s2">);</span>
+
+        <span class="s1">fullName </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Name</span><span class="s2">);</span>
+        <span class="s1">email </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Email</span><span class="s2">);</span>
+        <span class="s1">phone </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_PNumber</span><span class="s2">);</span>
+        <span class="s1">birthday </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Bday</span><span class="s2">);</span>
+        <span class="s1">password </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Password</span><span class="s2">);</span>
+        <span class="s1">confirmPassword </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Confirm_Password</span><span class="s2">);</span>
+        <span class="s1">registerClick </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Click</span><span class="s2">);</span>
+        <span class="s1">gotoLogin </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_LogIn</span><span class="s2">);</span>
+        <span class="s1">asLandlord </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Landlord</span><span class="s2">);</span>
+        <span class="s1">asTenant </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Tenant</span><span class="s2">);</span>
+        <span class="s1">female </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Female</span><span class="s2">);</span>
+        <span class="s1">male </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_Male</span><span class="s2">);</span>
+        <span class="s1">termsConditions </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">check_tac</span><span class="s2">);</span>
+        <span class="s1">textTermsConditions </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">tac_click1</span><span class="s2">);</span>
+        <span class="s1">progressBar </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">register_ProgressBar</span><span class="s2">);</span>
+        <span class="s1">uploadImageButton </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">uploadImageButton</span><span class="s2">);</span>
+        <span class="s1">profilePicPreview </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">profilePicPreview</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">setupListeners</span><span class="s2">() {</span>
+        <span class="s1">setupDatePicker</span><span class="s2">();</span>
+        <span class="s1">setupFieldListeners</span><span class="s2">();</span>
+
+        <span class="s1">uploadImageButton</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">view -&gt; selectImage</span><span class="s2">());</span>
+        <span class="s1">registerClick</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">view -&gt; handleRegister</span><span class="s2">());</span>
+        <span class="s1">gotoLogin</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">view -&gt; </span><span class="s2">{</span>
+            <span class="s1">Intent intent </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">Register</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">class</span><span class="s2">);</span>
+            <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">textTermsConditions</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">view -&gt; </span><span class="s2">{</span>
+            <span class="s1">Intent intent </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">Register</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">Terms_Conditions</span><span class="s2">.</span><span class="s0">class</span><span class="s2">);</span>
+            <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">setupDatePicker</span><span class="s2">() {</span>
+        <span class="s1">birthday</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">view -&gt; </span><span class="s2">{</span>
+            <span class="s0">final </span><span class="s1">Calendar calendar </span><span class="s2">= </span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+            <span class="s0">int </span><span class="s1">day </span><span class="s2">= </span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">DAY_OF_MONTH</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">month </span><span class="s2">= </span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MONTH</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">year </span><span class="s2">= </span><span class="s1">calendar</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">YEAR</span><span class="s2">);</span>
+
+            <span class="s1">picker </span><span class="s2">= </span><span class="s0">new </span><span class="s1">DatePickerDialog</span><span class="s2">(</span><span class="s1">Register</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, (</span><span class="s1">view1</span><span class="s2">, </span><span class="s1">year1</span><span class="s2">, </span><span class="s1">month1</span><span class="s2">, </span><span class="s1">dayOfMonth</span><span class="s2">) </span><span class="s1">-&gt;</span>
+                    <span class="s1">birthday</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">dayOfMonth </span><span class="s2">+ </span><span class="s3">&quot;/&quot; </span><span class="s2">+ (</span><span class="s1">month1 </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">) + </span><span class="s3">&quot;/&quot; </span><span class="s2">+ </span><span class="s1">year1</span><span class="s2">), </span><span class="s1">year</span><span class="s2">, </span><span class="s1">month</span><span class="s2">, </span><span class="s1">day</span><span class="s2">);</span>
+            <span class="s1">picker</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">setupFieldListeners</span><span class="s2">() {</span>
+        <span class="s1">asTenant</span><span class="s2">.</span><span class="s1">setOnCheckedChangeListener</span><span class="s2">((</span><span class="s1">button</span><span class="s2">, </span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">asLandlord</span><span class="s2">.</span><span class="s1">setChecked</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">asLandlord</span><span class="s2">.</span><span class="s1">setOnCheckedChangeListener</span><span class="s2">((</span><span class="s1">button</span><span class="s2">, </span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">asTenant</span><span class="s2">.</span><span class="s1">setChecked</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s1">male</span><span class="s2">.</span><span class="s1">setOnCheckedChangeListener</span><span class="s2">((</span><span class="s1">button</span><span class="s2">, </span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">female</span><span class="s2">.</span><span class="s1">setChecked</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">female</span><span class="s2">.</span><span class="s1">setOnCheckedChangeListener</span><span class="s2">((</span><span class="s1">button</span><span class="s2">, </span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">male</span><span class="s2">.</span><span class="s1">setChecked</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">selectImage</span><span class="s2">() {</span>
+        <span class="s1">Intent intent </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">ACTION_GET_CONTENT</span><span class="s2">);</span>
+        <span class="s1">intent</span><span class="s2">.</span><span class="s1">setType</span><span class="s2">(</span><span class="s3">&quot;image/*&quot;</span><span class="s2">);</span>
+        <span class="s1">startActivityForResult</span><span class="s2">(</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">createChooser</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">, </span><span class="s3">&quot;Select Profile Image&quot;</span><span class="s2">), </span><span class="s4">100</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onActivityResult</span><span class="s2">(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s2">, </span><span class="s0">int </span><span class="s1">resultCode</span><span class="s2">, </span><span class="s1">Intent data</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onActivityResult</span><span class="s2">(</span><span class="s1">requestCode</span><span class="s2">, </span><span class="s1">resultCode</span><span class="s2">, </span><span class="s1">data</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">requestCode </span><span class="s2">== </span><span class="s4">100 </span><span class="s2">&amp;&amp; </span><span class="s1">resultCode </span><span class="s2">== </span><span class="s1">RESULT_OK </span><span class="s2">&amp;&amp; </span><span class="s1">data </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">data</span><span class="s2">.</span><span class="s1">getData</span><span class="s2">() != </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">selectedImageUri </span><span class="s2">= </span><span class="s1">data</span><span class="s2">.</span><span class="s1">getData</span><span class="s2">();</span>
+            <span class="s1">profilePicPreview</span><span class="s2">.</span><span class="s1">setImageURI</span><span class="s2">(</span><span class="s1">selectedImageUri</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">handleRegister</span><span class="s2">() {</span>
+        <span class="s5">// Validate all fields</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">validateAllFields</span><span class="s2">()) </span><span class="s0">return</span><span class="s2">;</span>
+
+        <span class="s1">progressBar</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">VISIBLE</span><span class="s2">);</span>
+
+        <span class="s5">// Register user with Firebase Authentication</span>
+        <span class="s1">fAuth</span><span class="s2">.</span><span class="s1">createUserWithEmailAndPassword</span><span class="s2">(</span><span class="s1">email</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">(), </span><span class="s1">password</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">authResult -&gt; </span><span class="s2">{</span>
+                    <span class="s1">FirebaseUser user </span><span class="s2">= </span><span class="s1">fAuth</span><span class="s2">.</span><span class="s1">getCurrentUser</span><span class="s2">();</span>
+                    <span class="s0">if </span><span class="s2">(</span><span class="s1">user </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                        <span class="s1">user</span><span class="s2">.</span><span class="s1">sendEmailVerification</span><span class="s2">().</span><span class="s1">addOnCompleteListener</span><span class="s2">(</span><span class="s1">task -&gt; </span><span class="s2">{</span>
+                            <span class="s0">if </span><span class="s2">(</span><span class="s1">task</span><span class="s2">.</span><span class="s1">isSuccessful</span><span class="s2">()) {</span>
+                                <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Verification Email Sent.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                                <span class="s1">progressBar</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">GONE</span><span class="s2">);</span>
+
+                                <span class="s5">// Check email verification</span>
+                                <span class="s1">checkEmailVerification</span><span class="s2">(</span><span class="s1">user</span><span class="s2">);</span>
+                            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                                <span class="s1">showError</span><span class="s2">(</span><span class="s3">&quot;Failed to send verification email.&quot;</span><span class="s2">);</span>
+                            <span class="s2">}</span>
+                        <span class="s2">});</span>
+                    <span class="s2">}</span>
+                <span class="s2">})</span>
+                <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s1">e -&gt; showError</span><span class="s2">(</span><span class="s3">&quot;Registration failed: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">()));</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">checkEmailVerification</span><span class="s2">(</span><span class="s1">FirebaseUser user</span><span class="s2">) {</span>
+
+    <span class="s2">}</span>
+
+
+    <span class="s0">private void </span><span class="s1">uploadProfileImage</span><span class="s2">(</span><span class="s1">String uid</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedImageUri </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">StorageReference fileRef </span><span class="s2">= </span><span class="s1">storageRef</span><span class="s2">.</span><span class="s1">child</span><span class="s2">(</span><span class="s1">uid </span><span class="s2">+ </span><span class="s3">&quot;.jpg&quot;</span><span class="s2">);</span>
+            <span class="s1">fileRef</span><span class="s2">.</span><span class="s1">putFile</span><span class="s2">(</span><span class="s1">selectedImageUri</span><span class="s2">).</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">taskSnapshot -&gt;</span>
+                    <span class="s1">fileRef</span><span class="s2">.</span><span class="s1">getDownloadUrl</span><span class="s2">().</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">uri -&gt; </span><span class="s2">{</span>
+                        <span class="s1">saveUserToDatabase</span><span class="s2">(</span><span class="s1">uid</span><span class="s2">, </span><span class="s1">uri</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+                    <span class="s2">})).</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s1">e -&gt; </span><span class="s2">{</span>
+                <span class="s1">showError</span><span class="s2">(</span><span class="s3">&quot;Image upload failed: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s2">});</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">saveUserToDatabase</span><span class="s2">(</span><span class="s1">uid</span><span class="s2">, </span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">saveUserToDatabase</span><span class="s2">(</span><span class="s1">String uid</span><span class="s2">, </span><span class="s1">String imageUrl</span><span class="s2">) {</span>
+        <span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">, </span><span class="s1">Object</span><span class="s2">&gt; </span><span class="s1">userInfo </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;fullName&quot;</span><span class="s2">, </span><span class="s1">fullName</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;email&quot;</span><span class="s2">, </span><span class="s1">email</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;phone&quot;</span><span class="s2">, </span><span class="s1">phone</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;birthday&quot;</span><span class="s2">, </span><span class="s1">birthday</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;gender&quot;</span><span class="s2">, </span><span class="s1">female</span><span class="s2">.</span><span class="s1">isChecked</span><span class="s2">() ? </span><span class="s3">&quot;female&quot; </span><span class="s2">: </span><span class="s3">&quot;male&quot;</span><span class="s2">);</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;accountType&quot;</span><span class="s2">, </span><span class="s1">asLandlord</span><span class="s2">.</span><span class="s1">isChecked</span><span class="s2">() ? </span><span class="s3">&quot;landlord&quot; </span><span class="s2">: </span><span class="s3">&quot;tenant&quot;</span><span class="s2">);</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;profileImageUrl&quot;</span><span class="s2">, </span><span class="s1">imageUrl </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">? </span><span class="s1">imageUrl </span><span class="s2">: </span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;timestamp&quot;</span><span class="s2">, </span><span class="s1">System</span><span class="s2">.</span><span class="s1">currentTimeMillis</span><span class="s2">()); </span><span class="s5">// Add timestamp</span>
+        <span class="s1">userInfo</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;onlineStatus&quot;</span><span class="s2">, </span><span class="s3">&quot;offline&quot;</span><span class="s2">); </span><span class="s5">// Default to offline</span>
+
+        <span class="s1">databaseReference</span><span class="s2">.</span><span class="s1">child</span><span class="s2">(</span><span class="s1">uid</span><span class="s2">).</span><span class="s1">setValue</span><span class="s2">(</span><span class="s1">userInfo</span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">unused -&gt; </span><span class="s2">{</span>
+                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Registration successful. Please verify your email.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                    <span class="s1">progressBar</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">GONE</span><span class="s2">);</span>
+                    <span class="s1">fAuth</span><span class="s2">.</span><span class="s1">signOut</span><span class="s2">(); </span><span class="s5">// Sign out to prevent immediate access</span>
+                    <span class="s1">finish</span><span class="s2">(); </span><span class="s5">// Close registration activity</span>
+                <span class="s2">})</span>
+                <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s1">e -&gt; showError</span><span class="s2">(</span><span class="s3">&quot;Failed to save user data: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">()));</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onResume</span><span class="s2">() {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onResume</span><span class="s2">();</span>
+        <span class="s1">FirebaseUser user </span><span class="s2">= </span><span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getCurrentUser</span><span class="s2">();</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">user </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">String uid </span><span class="s2">= </span><span class="s1">user</span><span class="s2">.</span><span class="s1">getUid</span><span class="s2">();</span>
+            <span class="s1">DatabaseReference userStatusRef </span><span class="s2">= </span><span class="s1">FirebaseDatabase</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getReference</span><span class="s2">(</span><span class="s3">&quot;Users&quot;</span><span class="s2">).</span><span class="s1">child</span><span class="s2">(</span><span class="s3">&quot;onlineStatus&quot;</span><span class="s2">);</span>
+
+            <span class="s1">userStatusRef</span><span class="s2">.</span><span class="s1">setValue</span><span class="s2">(</span><span class="s3">&quot;online&quot;</span><span class="s2">);</span>
+            <span class="s1">userStatusRef</span><span class="s2">.</span><span class="s1">onDisconnect</span><span class="s2">().</span><span class="s1">setValue</span><span class="s2">(</span><span class="s3">&quot;offline&quot;</span><span class="s2">); </span><span class="s5">// Automatically set to offline on disconnect</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onPause</span><span class="s2">() {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onPause</span><span class="s2">();</span>
+        <span class="s1">FirebaseUser user </span><span class="s2">= </span><span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getCurrentUser</span><span class="s2">();</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">user </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">String uid </span><span class="s2">= </span><span class="s1">user</span><span class="s2">.</span><span class="s1">getUid</span><span class="s2">();</span>
+            <span class="s1">DatabaseReference userStatusRef </span><span class="s2">= </span><span class="s1">FirebaseDatabase</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getReference</span><span class="s2">(</span><span class="s3">&quot;Users&quot;</span><span class="s2">).</span><span class="s1">child</span><span class="s2">(</span><span class="s1">uid</span><span class="s2">).</span><span class="s1">child</span><span class="s2">(</span><span class="s3">&quot;onlineStatus&quot;</span><span class="s2">);</span>
+
+            <span class="s1">userStatusRef</span><span class="s2">.</span><span class="s1">setValue</span><span class="s2">(</span><span class="s3">&quot;offline&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">private boolean </span><span class="s1">validateAllFields</span><span class="s2">() {</span>
+        <span class="s1">String fullname </span><span class="s2">= </span><span class="s1">fullName</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String eMail </span><span class="s2">= </span><span class="s1">email</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String cPhone </span><span class="s2">= </span><span class="s1">phone</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String bDay </span><span class="s2">= </span><span class="s1">birthday</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String pass </span><span class="s2">= </span><span class="s1">password</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">fullname</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">fullName</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Please enter your full name&quot;</span><span class="s2">);</span>
+            <span class="s1">fullName</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span><span class="s0">else if </span><span class="s2">(!</span><span class="s1">isFirstLetterCapitalized</span><span class="s2">(</span><span class="s1">fullname</span><span class="s2">)) {</span>
+            <span class="s1">fullName</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;First letter of each word must be capitalized&quot;</span><span class="s2">);</span>
+            <span class="s1">fullName</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s5">// Automatically capitalize the first letter of each word</span>
+            <span class="s1">String formattedName </span><span class="s2">= </span><span class="s1">capitalizeWords</span><span class="s2">(</span><span class="s1">fullname</span><span class="s2">);</span>
+            <span class="s1">fullName</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">formattedName</span><span class="s2">);  </span><span class="s5">// Set the formatted name back to the EditText</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">eMail</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">email</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Email is required&quot;</span><span class="s2">);</span>
+            <span class="s1">email</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(!</span><span class="s1">eMail</span><span class="s2">.</span><span class="s1">matches</span><span class="s2">(</span><span class="s3">&quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+</span><span class="s0">\\</span><span class="s3">.(com|org|net|edu|gov)$&quot;</span><span class="s2">)) {</span>
+            <span class="s1">email</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Enter a valid email address (e.g., user@example.com)&quot;</span><span class="s2">);</span>
+            <span class="s1">email</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">cPhone</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">phone</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Mobile No. is required&quot;</span><span class="s2">);</span>
+            <span class="s1">phone</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">cPhone</span><span class="s2">.</span><span class="s1">length</span><span class="s2">() != </span><span class="s4">11</span><span class="s2">) {</span>
+            <span class="s1">phone</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Mobile number must be exactly 11 digits&quot;</span><span class="s2">);</span>
+            <span class="s1">phone</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(!</span><span class="s1">cPhone</span><span class="s2">.</span><span class="s1">matches</span><span class="s2">(</span><span class="s3">&quot;^09</span><span class="s0">\\</span><span class="s3">d{9}$&quot;</span><span class="s2">)) {</span>
+            <span class="s1">phone</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Please enter a valid Philippine mobile number starting with '09'&quot;</span><span class="s2">);</span>
+            <span class="s1">phone</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(!</span><span class="s1">isValidPhilippinePrefix</span><span class="s2">(</span><span class="s1">cPhone</span><span class="s2">)) {</span>
+            <span class="s1">phone</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Invalid mobile number prefix for the Philippines&quot;</span><span class="s2">);</span>
+            <span class="s1">phone</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">bDay</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">birthday</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Date of birth is required&quot;</span><span class="s2">);</span>
+            <span class="s1">birthday</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span><span class="s0">else if </span><span class="s2">(!</span><span class="s1">isAtLeast18YearsOld</span><span class="s2">(</span><span class="s1">bDay</span><span class="s2">)) { </span><span class="s5">// Ensure age is at least 18 years</span>
+            <span class="s1">birthday</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;You must be at least 18 years old&quot;</span><span class="s2">);</span>
+            <span class="s1">birthday</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">pass</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">password</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Password is required&quot;</span><span class="s2">);</span>
+            <span class="s1">password</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">pass</span><span class="s2">.</span><span class="s1">length</span><span class="s2">() &lt; </span><span class="s4">6</span><span class="s2">) {</span>
+            <span class="s1">password</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Password too weak (minimum 6 characters)&quot;</span><span class="s2">);</span>
+            <span class="s1">password</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(!</span><span class="s1">pass</span><span class="s2">.</span><span class="s1">matches</span><span class="s2">(</span><span class="s3">&quot;^(?=.*[A-Z])(?=.*[a-z])(?=.*</span><span class="s0">\\</span><span class="s3">d).+$&quot;</span><span class="s2">)) { </span><span class="s5">// Regex for the password policy</span>
+            <span class="s1">password</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s3">&quot;Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number&quot;</span><span class="s2">);</span>
+            <span class="s1">password</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span><span class="s0">if </span><span class="s2">(!</span><span class="s1">termsConditions</span><span class="s2">.</span><span class="s1">isChecked</span><span class="s2">()) {</span>
+            <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;You must agree to the terms and conditions to proceed&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+            <span class="s0">return false</span><span class="s2">;  </span><span class="s5">// If the checkbox is not checked, return false to prevent account creation</span>
+        <span class="s2">}</span>
+
+        <span class="s5">// If all checks pass, proceed with account creation</span>
+        <span class="s0">return true</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private boolean </span><span class="s1">isValidPhilippinePrefix</span><span class="s2">(</span><span class="s1">String cPhone</span><span class="s2">) {</span>
+        <span class="s5">// List of valid mobile number prefixes in the Philippines</span>
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">validPrefixes </span><span class="s2">= {</span>
+                <span class="s3">&quot;0905&quot;</span><span class="s2">, </span><span class="s3">&quot;0906&quot;</span><span class="s2">, </span><span class="s3">&quot;0907&quot;</span><span class="s2">, </span><span class="s3">&quot;0908&quot;</span><span class="s2">, </span><span class="s3">&quot;0909&quot;</span><span class="s2">, </span><span class="s3">&quot;0910&quot;</span><span class="s2">, </span><span class="s3">&quot;0912&quot;</span><span class="s2">, </span><span class="s3">&quot;0915&quot;</span><span class="s2">, </span><span class="s3">&quot;0916&quot;</span><span class="s2">, </span><span class="s3">&quot;0917&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;0918&quot;</span><span class="s2">, </span><span class="s3">&quot;0919&quot;</span><span class="s2">, </span><span class="s3">&quot;0920&quot;</span><span class="s2">, </span><span class="s3">&quot;0921&quot;</span><span class="s2">, </span><span class="s3">&quot;0922&quot;</span><span class="s2">, </span><span class="s3">&quot;0923&quot;</span><span class="s2">, </span><span class="s3">&quot;0925&quot;</span><span class="s2">, </span><span class="s3">&quot;0926&quot;</span><span class="s2">, </span><span class="s3">&quot;0927&quot;</span><span class="s2">, </span><span class="s3">&quot;0928&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;0929&quot;</span><span class="s2">, </span><span class="s3">&quot;0930&quot;</span><span class="s2">, </span><span class="s3">&quot;0935&quot;</span><span class="s2">, </span><span class="s3">&quot;0936&quot;</span><span class="s2">, </span><span class="s3">&quot;0937&quot;</span><span class="s2">, </span><span class="s3">&quot;0938&quot;</span><span class="s2">, </span><span class="s3">&quot;0939&quot;</span><span class="s2">, </span><span class="s3">&quot;0940&quot;</span><span class="s2">, </span><span class="s3">&quot;0942&quot;</span><span class="s2">, </span><span class="s3">&quot;0943&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;0945&quot;</span><span class="s2">, </span><span class="s3">&quot;0946&quot;</span><span class="s2">, </span><span class="s3">&quot;0947&quot;</span><span class="s2">, </span><span class="s3">&quot;0948&quot;</span><span class="s2">, </span><span class="s3">&quot;0949&quot;</span><span class="s2">, </span><span class="s3">&quot;0950&quot;</span><span class="s2">, </span><span class="s3">&quot;0951&quot;</span><span class="s2">, </span><span class="s3">&quot;0955&quot;</span><span class="s2">, </span><span class="s3">&quot;0956&quot;</span><span class="s2">, </span><span class="s3">&quot;0957&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;0961&quot;</span><span class="s2">, </span><span class="s3">&quot;0963&quot;</span><span class="s2">, </span><span class="s3">&quot;0965&quot;</span><span class="s2">, </span><span class="s3">&quot;0966&quot;</span><span class="s2">, </span><span class="s3">&quot;0967&quot;</span><span class="s2">, </span><span class="s3">&quot;0970&quot;</span><span class="s2">, </span><span class="s3">&quot;0971&quot;</span><span class="s2">, </span><span class="s3">&quot;0973&quot;</span><span class="s2">, </span><span class="s3">&quot;0974&quot;</span><span class="s2">, </span><span class="s3">&quot;0975&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;0977&quot;</span><span class="s2">, </span><span class="s3">&quot;0978&quot;</span><span class="s2">, </span><span class="s3">&quot;0979&quot;</span><span class="s2">, </span><span class="s3">&quot;0981&quot;</span><span class="s2">, </span><span class="s3">&quot;0989&quot;</span><span class="s2">, </span><span class="s3">&quot;0991&quot;</span><span class="s2">, </span><span class="s3">&quot;0992&quot;</span><span class="s2">, </span><span class="s3">&quot;0993&quot;</span><span class="s2">, </span><span class="s3">&quot;0994&quot;</span><span class="s2">, </span><span class="s3">&quot;0995&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;0996&quot;</span><span class="s2">, </span><span class="s3">&quot;0997&quot;</span><span class="s2">, </span><span class="s3">&quot;0998&quot;</span><span class="s2">, </span><span class="s3">&quot;0999&quot;</span>
+        <span class="s2">};</span>
+
+        <span class="s5">// Extract the first 4 digits (prefix) of the mobile number</span>
+        <span class="s1">String prefix </span><span class="s2">= </span><span class="s1">cPhone</span><span class="s2">.</span><span class="s1">substring</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s4">4</span><span class="s2">);</span>
+
+        <span class="s5">// Check if the prefix is in the list of valid prefixes</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">String validPrefix </span><span class="s2">: </span><span class="s1">validPrefixes</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">validPrefix</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">prefix</span><span class="s2">)) {</span>
+                <span class="s0">return true</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return false</span><span class="s2">; </span><span class="s5">// If prefix is not in the list, return false</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private boolean </span><span class="s1">isFirstLetterCapitalized</span><span class="s2">(</span><span class="s1">String fullname</span><span class="s2">) {</span>
+        <span class="s5">// Split the input into words</span>
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">words </span><span class="s2">= </span><span class="s1">fullname</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\\</span><span class="s3">s+&quot;</span><span class="s2">);</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">String word </span><span class="s2">: </span><span class="s1">words</span><span class="s2">) {</span>
+            <span class="s5">// Check if the word is not empty and if the first letter is not uppercase</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">word</span><span class="s2">.</span><span class="s1">length</span><span class="s2">() &gt; </span><span class="s4">0 </span><span class="s2">&amp;&amp; !</span><span class="s1">Character</span><span class="s2">.</span><span class="s1">isUpperCase</span><span class="s2">(</span><span class="s1">word</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s4">0</span><span class="s2">))) {</span>
+                <span class="s0">return false</span><span class="s2">; </span><span class="s5">// If any word starts with a non-uppercase letter, return false</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return true</span><span class="s2">; </span><span class="s5">// All words start with an uppercase letter</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private </span><span class="s1">String capitalizeWords</span><span class="s2">(</span><span class="s1">String fullname</span><span class="s2">) {</span>
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">words </span><span class="s2">= </span><span class="s1">fullname</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\\</span><span class="s3">s+&quot;</span><span class="s2">);  </span><span class="s5">// Split the input string by spaces</span>
+        <span class="s1">StringBuilder capitalizedName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">String word </span><span class="s2">: </span><span class="s1">words</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">word</span><span class="s2">.</span><span class="s1">length</span><span class="s2">() &gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s1">capitalizedName</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">word</span><span class="s2">.</span><span class="s1">substring</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s4">1</span><span class="s2">).</span><span class="s1">toUpperCase</span><span class="s2">());  </span><span class="s5">// Capitalize the first letter</span>
+                <span class="s1">capitalizedName</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">word</span><span class="s2">.</span><span class="s1">substring</span><span class="s2">(</span><span class="s4">1</span><span class="s2">).</span><span class="s1">toLowerCase</span><span class="s2">());      </span><span class="s5">// Lowercase the remaining letters</span>
+                <span class="s1">capitalizedName</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot; &quot;</span><span class="s2">);  </span><span class="s5">// Add space between words</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s5">// Remove the last trailing space and return the formatted string</span>
+        <span class="s0">return </span><span class="s1">capitalizedName</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// Utility method to ensure the user is at least 18 years old</span>
+    <span class="s0">private boolean </span><span class="s1">isAtLeast18YearsOld</span><span class="s2">(</span><span class="s1">String bDay</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">SimpleDateFormat sdf </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SimpleDateFormat</span><span class="s2">(</span><span class="s3">&quot;dd/MM/yyyy&quot;</span><span class="s2">, </span><span class="s1">Locale</span><span class="s2">.</span><span class="s1">US</span><span class="s2">);</span>
+            <span class="s1">sdf</span><span class="s2">.</span><span class="s1">setLenient</span><span class="s2">(</span><span class="s0">false</span><span class="s2">); </span><span class="s5">// Strict parsing to avoid invalid dates</span>
+            <span class="s1">Date birthDate </span><span class="s2">= </span><span class="s1">sdf</span><span class="s2">.</span><span class="s1">parse</span><span class="s2">(</span><span class="s1">bDay</span><span class="s2">);</span>
+
+            <span class="s5">// Calendar instance for the current date</span>
+            <span class="s1">Calendar today </span><span class="s2">= </span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+
+            <span class="s5">// Calendar instance for the birth date</span>
+            <span class="s1">Calendar birthDay </span><span class="s2">= </span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+            <span class="s1">birthDay</span><span class="s2">.</span><span class="s1">setTime</span><span class="s2">(</span><span class="s1">birthDate</span><span class="s2">);</span>
+
+            <span class="s5">// Calculate age</span>
+            <span class="s0">int </span><span class="s1">age </span><span class="s2">= </span><span class="s1">today</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">YEAR</span><span class="s2">) - </span><span class="s1">birthDay</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">YEAR</span><span class="s2">);</span>
+
+            <span class="s5">// Adjust age if the current date is before the user's birthday this year</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">today</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">DAY_OF_YEAR</span><span class="s2">) &lt; </span><span class="s1">birthDay</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">DAY_OF_YEAR</span><span class="s2">)) {</span>
+                <span class="s1">age</span><span class="s2">--;</span>
+            <span class="s2">}</span>
+
+            <span class="s0">return </span><span class="s1">age </span><span class="s2">&gt;= </span><span class="s4">18</span><span class="s2">; </span><span class="s5">// Check if age is at least 18</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">ParseException e</span><span class="s2">) {</span>
+            <span class="s0">return false</span><span class="s2">; </span><span class="s5">// Invalid date format</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">private void </span><span class="s1">showError</span><span class="s2">(</span><span class="s1">String message</span><span class="s2">) {</span>
+        <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">message</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+        <span class="s1">progressBar</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">GONE</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Profile.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Profile.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">Nullable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">ViewGroup</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">.</span><span class="s1">databinding</span><span class="s2">.</span><span class="s1">FragmentProfileBinding</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseAuth</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DataSnapshot</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DatabaseError</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DatabaseReference</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">ValueEventListener</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Profile </span><span class="s0">extends </span><span class="s1">Fragment </span><span class="s2">{</span>
+
+    <span class="s0">private </span><span class="s1">FragmentProfileBinding binding</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">FirebaseAuth firebaseAuth</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">Context mContext</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">View onCreateView</span><span class="s2">(</span><span class="s1">@NonNull LayoutInflater inflater</span><span class="s2">, </span><span class="s1">@Nullable ViewGroup container</span><span class="s2">, </span><span class="s1">@Nullable Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s3">// Use the provided LayoutInflater to initialize the binding</span>
+        <span class="s1">binding </span><span class="s2">= </span><span class="s1">FragmentProfileBinding</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">LayoutInflater</span><span class="s2">.</span><span class="s1">from</span><span class="s2">(</span><span class="s1">mContext</span><span class="s2">), </span><span class="s1">container</span><span class="s2">, </span><span class="s0">false</span><span class="s2">);</span>
+
+        <span class="s3">// Return the root view of the binding</span>
+        <span class="s0">return </span><span class="s1">binding</span><span class="s2">.</span><span class="s1">getRoot</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onViewCreated</span><span class="s2">(</span><span class="s1">@NonNull View view</span><span class="s2">, </span><span class="s1">@Nullable Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onViewCreated</span><span class="s2">(</span><span class="s1">view</span><span class="s2">, </span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+
+        <span class="s1">firebaseAuth </span><span class="s2">= </span><span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+
+        <span class="s3">//loadMyInfo();</span>
+    <span class="s2">}</span>
+
+    <span class="s3">/*private void loadMyInfo() { 
+        DatabaseReference ref = FirebaseDatabse.getInstance().getReference(&quot;Users&quot;); 
+        ref.child(firebaseAuth.getUid()) 
+                .addValueEventListener(new ValueEventListener() { 
+                    @Override 
+                    public void onDataChange(@NonNull DataSnapshot snapshot) { 
+ 
+                        String bday = &quot;&quot;+snapshot.child(&quot;birthday&quot;).getValue(); 
+                        String email = &quot;&quot;+snapshot.child(&quot;email&quot;).getValue(); 
+                        String name = &quot;&quot;+snapshot.child(&quot;fullname&quot;).getValue(); 
+                        String gender = &quot;&quot;+snapshot.child(&quot;gender&quot;).getValue(); 
+                        String mobileNum = &quot;&quot;+snapshot.child(&quot;mobileNumber&quot;).getValue(); 
+                        String timestamp = &quot;&quot;+snapshot.child(&quot;timestamp&quot;).getValue(); 
+ 
+                        if (timestamp.equals(&quot;null&quot;)){ 
+                            timestamp = &quot;0&quot;; 
+                        } 
+                        String formattedDate = Utils.formatTimestampDate(Long.parseLong(timestamp)); 
+ 
+                       /* if (userType.equals()){ 
+                            boolean isVerified = firebaseAuth.getCurrentUser().isEmailVerified(); 
+                            if (isVerified){ 
+                                binding.show_verification.setText 
+                            } else { 
+ 
+                            } 
+                        } 
+ 
+                    } 
+ 
+ 
+ 
+                    @Override 
+                    public void onCancelled(@NonNull DatabaseError error) { 
+ 
+                    } 
+                });*/</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

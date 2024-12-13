@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>BedspaceAdapter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BedspaceAdapter.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">ViewGroup</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Toast</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">recyclerview</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">RecyclerView</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">bumptech</span><span class="s2">.</span><span class="s1">glide</span><span class="s2">.</span><span class="s1">Glide</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">firestore</span><span class="s2">.</span><span class="s1">FirebaseFirestore</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">BedspaceAdapter </span><span class="s0">extends </span><span class="s1">RecyclerView</span><span class="s2">.</span><span class="s1">Adapter</span><span class="s2">&lt;</span><span class="s1">BedspaceAdapter</span><span class="s2">.</span><span class="s1">BedspaceViewHolder</span><span class="s2">&gt; {</span>
+
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Listings</span><span class="s2">&gt; </span><span class="s1">bedspaceList</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String accountType</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">BedspaceAdapter</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Listings</span><span class="s2">&gt; </span><span class="s1">bedspaceList</span><span class="s2">, </span><span class="s1">String accountType</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">bedspaceList </span><span class="s2">= </span><span class="s1">bedspaceList</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">accountType </span><span class="s2">= </span><span class="s1">accountType</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">BedspaceViewHolder onCreateViewHolder</span><span class="s2">(</span><span class="s1">ViewGroup parent</span><span class="s2">, </span><span class="s0">int </span><span class="s1">viewType</span><span class="s2">) {</span>
+        <span class="s1">View itemView </span><span class="s2">= </span><span class="s1">LayoutInflater</span><span class="s2">.</span><span class="s1">from</span><span class="s2">(</span><span class="s1">parent</span><span class="s2">.</span><span class="s1">getContext</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">items_layout</span><span class="s2">, </span><span class="s1">parent</span><span class="s2">, </span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s0">return new </span><span class="s1">BedspaceViewHolder</span><span class="s2">(</span><span class="s1">itemView</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBindViewHolder</span><span class="s2">(</span><span class="s1">BedspaceViewHolder holder</span><span class="s2">, </span><span class="s0">int </span><span class="s1">position</span><span class="s2">) {</span>
+        <span class="s1">Listings bedspace </span><span class="s2">= </span><span class="s1">bedspaceList</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">position</span><span class="s2">);</span>
+        <span class="s1">holder</span><span class="s2">.</span><span class="s1">descriptionTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">bedspace</span><span class="s2">.</span><span class="s1">getDescription</span><span class="s2">());</span>
+        <span class="s1">holder</span><span class="s2">.</span><span class="s1">priceTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">bedspace</span><span class="s2">.</span><span class="s1">getPrice</span><span class="s2">());</span>
+        <span class="s1">holder</span><span class="s2">.</span><span class="s1">contactNumberTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">bedspace</span><span class="s2">.</span><span class="s1">getContactNumber</span><span class="s2">());</span>
+        <span class="s1">holder</span><span class="s2">.</span><span class="s1">locationTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">bedspace</span><span class="s2">.</span><span class="s1">getLocation</span><span class="s2">());</span>
+        <span class="s1">Glide</span><span class="s2">.</span><span class="s1">with</span><span class="s2">(</span><span class="s1">holder</span><span class="s2">.</span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">getContext</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">load</span><span class="s2">(</span><span class="s1">bedspace</span><span class="s2">.</span><span class="s1">getImageUrl</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">into</span><span class="s2">(</span><span class="s1">holder</span><span class="s2">.</span><span class="s1">image</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s3">&quot;Landlord&quot;</span><span class="s2">.</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s1">accountType</span><span class="s2">)) {</span>
+            <span class="s1">holder</span><span class="s2">.</span><span class="s1">imageViewAction</span><span class="s2">.</span><span class="s1">setImageResource</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">delete_button</span><span class="s2">);</span>
+            <span class="s1">holder</span><span class="s2">.</span><span class="s1">imageViewAction</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">v -&gt; </span><span class="s2">{</span>
+                <span class="s1">FirebaseFirestore db </span><span class="s2">= </span><span class="s1">FirebaseFirestore</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+                <span class="s1">db</span><span class="s2">.</span><span class="s1">collection</span><span class="s2">(</span><span class="s3">&quot;listings&quot;</span><span class="s2">).</span><span class="s1">document</span><span class="s2">(</span><span class="s1">bedspace</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s1">delete</span><span class="s2">()</span>
+                        <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">aVoid -&gt; </span><span class="s2">{</span>
+                            <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">holder</span><span class="s2">.</span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s3">&quot;Apartment deleted!&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                            <span class="s1">bedspaceList</span><span class="s2">.</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">position</span><span class="s2">);</span>
+                            <span class="s1">notifyItemRemoved</span><span class="s2">(</span><span class="s1">position</span><span class="s2">);</span>
+                        <span class="s2">})</span>
+                        <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s1">e -&gt; </span><span class="s2">{</span>
+                            <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">holder</span><span class="s2">.</span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s3">&quot;Failed to delete: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">(), </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                        <span class="s2">});</span>
+            <span class="s2">});</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">holder</span><span class="s2">.</span><span class="s1">imageViewAction</span><span class="s2">.</span><span class="s1">setImageResource</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">baseline_favorite_24</span><span class="s2">);</span>
+            <span class="s1">holder</span><span class="s2">.</span><span class="s1">imageViewAction</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">v -&gt; </span><span class="s2">{</span>
+                <span class="s4">// Handle &quot;favorite&quot; action if needed</span>
+                <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">holder</span><span class="s2">.</span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s3">&quot;Added to favorites!&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+            <span class="s2">});</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public int </span><span class="s1">getItemCount</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">bedspaceList</span><span class="s2">.</span><span class="s1">size</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static class </span><span class="s1">BedspaceViewHolder </span><span class="s0">extends </span><span class="s1">RecyclerView</span><span class="s2">.</span><span class="s1">ViewHolder </span><span class="s2">{</span>
+        <span class="s0">public </span><span class="s1">TextView descriptionTextView</span><span class="s2">;</span>
+        <span class="s0">public </span><span class="s1">TextView priceTextView</span><span class="s2">;</span>
+        <span class="s0">public </span><span class="s1">TextView contactNumberTextView</span><span class="s2">;</span>
+        <span class="s0">public </span><span class="s1">TextView locationTextView</span><span class="s2">;</span>
+        <span class="s1">ImageView image</span><span class="s2">, </span><span class="s1">imageViewAction</span><span class="s2">;</span>
+
+        <span class="s0">public </span><span class="s1">BedspaceViewHolder</span><span class="s2">(</span><span class="s1">View view</span><span class="s2">) {</span>
+            <span class="s0">super</span><span class="s2">(</span><span class="s1">view</span><span class="s2">);</span>
+            <span class="s1">descriptionTextView </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textViewDescription</span><span class="s2">);</span>
+            <span class="s1">priceTextView </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textViewPrice</span><span class="s2">);</span>
+            <span class="s1">contactNumberTextView </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textViewContactNumber</span><span class="s2">);</span>
+            <span class="s1">locationTextView </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textViewLocation</span><span class="s2">);</span>
+            <span class="s1">image </span><span class="s2">= </span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">imageView</span><span class="s2">);</span>
+            <span class="s1">imageViewAction </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">imageViewAction</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

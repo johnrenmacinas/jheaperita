@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FaQ">
+
+    <include layout="@layout/header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/faq_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Frequently Asked Questions"
+                android:textColor="#FF000000"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/gen_Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="General Questions"
+                android:textColor="#FF000000"
+                android:textSize="25sp"
+                android:background="@color/yellow" />
+
+            <!-- FAQ 1 -->
+            <LinearLayout
+                android:id="@+id/faq1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="1. What is BaHi?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ1"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 2 -->
+            <LinearLayout
+                android:id="@+id/faq2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="2. How do I create an account?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ2"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 3 -->
+            <LinearLayout
+                android:id="@+id/faq3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="3. Is it free to use BaHi?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ3"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/forTenant_Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="For Tenants"
+                android:textColor="#FF000000"
+                android:textSize="25sp"
+                android:background="@color/yellow" />
+
+            <!-- FAQ 4 -->
+            <LinearLayout
+                android:id="@+id/faq4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="4. How do I search for a house?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ4"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 5 -->
+            <LinearLayout
+                android:id="@+id/faq5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="5. Can I schedule a property viewing?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ5"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 6 -->
+            <LinearLayout
+                android:id="@+id/faq6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="6. How do I know if a property is available?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ6"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 7 -->
+            <LinearLayout
+                android:id="@+id/faq7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="7. Are the properties verified?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ7"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/forLandlord_Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="For Landlords"
+                android:textColor="#FF000000"
+                android:textSize="25sp"
+                android:background="@color/yellow" />
+
+            <!-- FAQ 8 -->
+            <LinearLayout
+                android:id="@+id/faq8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="8. How can I list my property?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ8"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 9 -->
+            <LinearLayout
+                android:id="@+id/faq9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="9. How much does it cost to list a property?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ9"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 10 -->
+            <LinearLayout
+                android:id="@+id/faq10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10. Can I edit my listing after posting it?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ10"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/payment_Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Payments"
+                android:textColor="#FF000000"
+                android:textSize="25sp"
+                android:background="@color/yellow" />
+
+            <!-- FAQ 11 -->
+            <LinearLayout
+                android:id="@+id/faq11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="11. Do I pay rent through BaHi?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ11"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 12 -->
+            <LinearLayout
+                android:id="@+id/faq12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="12. Are there any additional fees?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ12"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/techSup_Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Technical Support"
+                android:textColor="#FF000000"
+                android:textSize="25sp"
+                android:background="@color/yellow" />
+
+            <!-- FAQ 13 -->
+            <LinearLayout
+                android:id="@+id/faq13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="13. I forgot my password. What should I do?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ13"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 14 -->
+            <LinearLayout
+                android:id="@+id/faq14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="14. I encountered a problem while using the website. How can I get help?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ14"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/snS_Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Safety and Security"
+                android:textColor="#FF000000"
+                android:textSize="25sp"
+                android:background="@color/yellow" />
+
+            <!-- FAQ 15 -->
+            <LinearLayout
+                android:id="@+id/faq15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="15. How can I avoid scams?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ15"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- FAQ 16 -->
+            <LinearLayout
+                android:id="@+id/faq16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/question16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="16. Is my personal information secure?"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/btnQestion16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_down_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/answer16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:padding="10sp"
+                    android:text="@string/faQ16"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

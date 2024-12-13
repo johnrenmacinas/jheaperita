@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Home_Admin.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #67a37c; font-style: italic;}
+.s5 { color: #7a7e85;}
+.s6 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Home_Admin.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">ViewGroup</span><span class="s2">;</span>
+
+<span class="s3">/**</span>
+ <span class="s3">* A simple {</span><span class="s4">@link </span><span class="s3">Fragment} subclass.</span>
+ <span class="s3">* Use the {</span><span class="s4">@link </span><span class="s3">Home_Admin#newInstance} factory method to</span>
+ <span class="s3">* create an instance of this fragment.</span>
+ <span class="s3">*/</span>
+<span class="s0">public class </span><span class="s1">Home_Admin </span><span class="s0">extends </span><span class="s1">Fragment </span><span class="s2">{</span>
+
+    <span class="s5">// TODO: Rename parameter arguments, choose names that match</span>
+    <span class="s5">// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER</span>
+    <span class="s0">private static final </span><span class="s1">String ARG_PARAM1 </span><span class="s2">= </span><span class="s6">&quot;param1&quot;</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String ARG_PARAM2 </span><span class="s2">= </span><span class="s6">&quot;param2&quot;</span><span class="s2">;</span>
+
+    <span class="s5">// TODO: Rename and change types of parameters</span>
+    <span class="s0">private </span><span class="s1">String mParam1</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String mParam2</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Home_Admin</span><span class="s2">() {</span>
+        <span class="s5">// Required empty public constructor</span>
+    <span class="s2">}</span>
+
+    <span class="s3">/**</span>
+     <span class="s3">* Use this factory method to create a new instance of</span>
+     <span class="s3">* this fragment using the provided parameters.</span>
+     <span class="s3">*</span>
+     <span class="s3">* </span><span class="s4">@param </span><span class="s3">param1 Parameter 1.</span>
+     <span class="s3">* </span><span class="s4">@param </span><span class="s3">param2 Parameter 2.</span>
+     <span class="s3">* </span><span class="s4">@return </span><span class="s3">A new instance of fragment Home_Admin.</span>
+     <span class="s3">*/</span>
+    <span class="s5">// TODO: Rename and change types and number of parameters</span>
+    <span class="s0">public static </span><span class="s1">Home_Admin newInstance</span><span class="s2">(</span><span class="s1">String param1</span><span class="s2">, </span><span class="s1">String param2</span><span class="s2">) {</span>
+        <span class="s1">Home_Admin fragment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Home_Admin</span><span class="s2">();</span>
+        <span class="s1">Bundle args </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Bundle</span><span class="s2">();</span>
+        <span class="s1">args</span><span class="s2">.</span><span class="s1">putString</span><span class="s2">(</span><span class="s1">ARG_PARAM1</span><span class="s2">, </span><span class="s1">param1</span><span class="s2">);</span>
+        <span class="s1">args</span><span class="s2">.</span><span class="s1">putString</span><span class="s2">(</span><span class="s1">ARG_PARAM2</span><span class="s2">, </span><span class="s1">param2</span><span class="s2">);</span>
+        <span class="s1">fragment</span><span class="s2">.</span><span class="s1">setArguments</span><span class="s2">(</span><span class="s1">args</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">fragment</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">getArguments</span><span class="s2">() != </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">mParam1 </span><span class="s2">= </span><span class="s1">getArguments</span><span class="s2">().</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">ARG_PARAM1</span><span class="s2">);</span>
+            <span class="s1">mParam2 </span><span class="s2">= </span><span class="s1">getArguments</span><span class="s2">().</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">ARG_PARAM2</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">View onCreateView</span><span class="s2">(</span><span class="s1">LayoutInflater inflater</span><span class="s2">, </span><span class="s1">ViewGroup container</span><span class="s2">,</span>
+                             <span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s5">// Inflate the layout for this fragment</span>
+        <span class="s0">return </span><span class="s1">inflater</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">fragment_home__admin</span><span class="s2">, </span><span class="s1">container</span><span class="s2">, </span><span class="s0">false</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

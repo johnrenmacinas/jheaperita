@@ -1,0 +1,190 @@
+<html>
+<head>
+<title>Listing.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Listing.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.</span><span class="s1">Uri</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">Nullable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">ViewGroup</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">ArrayAdapter</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">EditText</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Spinner</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Toast</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">OnSuccessListener</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">firestore</span><span class="s2">.</span><span class="s1">FirebaseFirestore</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">storage</span><span class="s2">.</span><span class="s1">FirebaseStorage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">storage</span><span class="s2">.</span><span class="s1">StorageReference</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">storage</span><span class="s2">.</span><span class="s1">UploadTask</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">HashMap</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Map</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Listing </span><span class="s0">extends </span><span class="s1">Fragment </span><span class="s2">{</span>
+    <span class="s0">private static final int </span><span class="s1">PICK_IMAGE_REQUEST </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">EditText editTextDescription</span><span class="s2">, </span><span class="s1">editTextPrice</span><span class="s2">, </span><span class="s1">editTextContactNumber</span><span class="s2">, </span><span class="s1">editTextLocation</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Spinner spinnerUnitType</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Button buttonSubmit</span><span class="s2">, </span><span class="s1">buttonCapturePicture</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">ImageView imageViewPicture</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">FirebaseFirestore db</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">StorageReference storageReference</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Uri imageUri</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">db </span><span class="s2">= </span><span class="s1">FirebaseFirestore</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s1">storageReference </span><span class="s2">= </span><span class="s1">FirebaseStorage</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getReference</span><span class="s2">(</span><span class="s4">&quot;listings&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">View onCreateView</span><span class="s2">(</span><span class="s1">LayoutInflater inflater</span><span class="s2">, </span><span class="s1">ViewGroup container</span><span class="s2">,</span>
+                             <span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s1">View view </span><span class="s2">= </span><span class="s1">inflater</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">fragment_listing</span><span class="s2">, </span><span class="s1">container</span><span class="s2">, </span><span class="s0">false</span><span class="s2">);</span>
+
+        <span class="s1">editTextDescription </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">editTextDescription</span><span class="s2">);</span>
+        <span class="s1">editTextPrice </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">editTextPrice</span><span class="s2">);</span>
+        <span class="s1">editTextContactNumber </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">editTextContactNumber</span><span class="s2">);</span>
+        <span class="s1">editTextLocation </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">editTextLocation</span><span class="s2">);</span>
+        <span class="s1">spinnerUnitType </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">spinnerUnitType</span><span class="s2">);</span>
+        <span class="s1">buttonSubmit </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">buttonSubmit</span><span class="s2">);</span>
+        <span class="s1">buttonCapturePicture </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">buttonCapturePicture</span><span class="s2">);</span>
+        <span class="s1">imageViewPicture </span><span class="s2">= </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">imageViewPicture</span><span class="s2">);</span>
+
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">unitTypes </span><span class="s2">= {</span><span class="s4">&quot;Condo&quot;</span><span class="s2">, </span><span class="s4">&quot;House&quot;</span><span class="s2">, </span><span class="s4">&quot;Listings&quot;</span><span class="s2">, </span><span class="s4">&quot;Bedspace&quot;</span><span class="s2">};</span>
+        <span class="s1">ArrayAdapter</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">adapter </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayAdapter</span><span class="s2">&lt;&gt;(</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s1">android</span><span class="s2">.</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">simple_spinner_item</span><span class="s2">, </span><span class="s1">unitTypes</span><span class="s2">);</span>
+        <span class="s1">adapter</span><span class="s2">.</span><span class="s1">setDropDownViewResource</span><span class="s2">(</span><span class="s1">android</span><span class="s2">.</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">simple_spinner_dropdown_item</span><span class="s2">);</span>
+        <span class="s1">spinnerUnitType</span><span class="s2">.</span><span class="s1">setAdapter</span><span class="s2">(</span><span class="s1">adapter</span><span class="s2">);</span>
+
+        <span class="s1">buttonCapturePicture</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">v -&gt; openFileChooser</span><span class="s2">());</span>
+        <span class="s1">buttonSubmit</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">v -&gt; uploadImageAndSaveData</span><span class="s2">());</span>
+
+        <span class="s0">return </span><span class="s1">view</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">openFileChooser</span><span class="s2">() {</span>
+        <span class="s1">Intent intent </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">();</span>
+        <span class="s1">intent</span><span class="s2">.</span><span class="s1">setType</span><span class="s2">(</span><span class="s4">&quot;image/*&quot;</span><span class="s2">);</span>
+        <span class="s1">intent</span><span class="s2">.</span><span class="s1">setAction</span><span class="s2">(</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">ACTION_GET_CONTENT</span><span class="s2">);</span>
+        <span class="s1">startActivityForResult</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">, </span><span class="s1">PICK_IMAGE_REQUEST</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onActivityResult</span><span class="s2">(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s2">, </span><span class="s0">int </span><span class="s1">resultCode</span><span class="s2">, </span><span class="s1">@Nullable Intent data</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onActivityResult</span><span class="s2">(</span><span class="s1">requestCode</span><span class="s2">, </span><span class="s1">resultCode</span><span class="s2">, </span><span class="s1">data</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">requestCode </span><span class="s2">== </span><span class="s1">PICK_IMAGE_REQUEST </span><span class="s2">&amp;&amp; </span><span class="s1">data </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">data</span><span class="s2">.</span><span class="s1">getData</span><span class="s2">() != </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">imageUri </span><span class="s2">= </span><span class="s1">data</span><span class="s2">.</span><span class="s1">getData</span><span class="s2">();</span>
+            <span class="s1">imageViewPicture</span><span class="s2">.</span><span class="s1">setImageURI</span><span class="s2">(</span><span class="s1">imageUri</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">uploadImageAndSaveData</span><span class="s2">() {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">imageUri </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s4">&quot;Please select an image.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">String description </span><span class="s2">= </span><span class="s1">editTextDescription</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String price </span><span class="s2">= </span><span class="s1">editTextPrice</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String contactNumber </span><span class="s2">= </span><span class="s1">editTextContactNumber</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String location </span><span class="s2">= </span><span class="s1">editTextLocation</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String unitType </span><span class="s2">= </span><span class="s1">spinnerUnitType</span><span class="s2">.</span><span class="s1">getSelectedItem</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">isValidPhilippinePrefix</span><span class="s2">(</span><span class="s1">contactNumber</span><span class="s2">)) {</span>
+            <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s4">&quot;Invalid phone number prefix.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">description</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">price</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">contactNumber</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">location</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s4">&quot;Please fill in all fields.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">StorageReference fileReference </span><span class="s2">= </span><span class="s1">storageReference</span><span class="s2">.</span><span class="s1">child</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">currentTimeMillis</span><span class="s2">() + </span><span class="s4">&quot;.jpg&quot;</span><span class="s2">);</span>
+        <span class="s1">fileReference</span><span class="s2">.</span><span class="s1">putFile</span><span class="s2">(</span><span class="s1">imageUri</span><span class="s2">).</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">taskSnapshot -&gt;</span>
+                <span class="s1">fileReference</span><span class="s2">.</span><span class="s1">getDownloadUrl</span><span class="s2">().</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">uri -&gt; </span><span class="s2">{</span>
+                    <span class="s1">String imageUrl </span><span class="s2">= </span><span class="s1">uri</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">();</span>
+
+                    <span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">, </span><span class="s1">Object</span><span class="s2">&gt; </span><span class="s1">listingData </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+                    <span class="s1">listingData</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s4">&quot;description&quot;</span><span class="s2">, </span><span class="s1">description</span><span class="s2">);</span>
+                    <span class="s1">listingData</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s4">&quot;price&quot;</span><span class="s2">, </span><span class="s1">price</span><span class="s2">);</span>
+                    <span class="s1">listingData</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s4">&quot;contactNumber&quot;</span><span class="s2">, </span><span class="s1">contactNumber</span><span class="s2">);</span>
+                    <span class="s1">listingData</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s4">&quot;location&quot;</span><span class="s2">, </span><span class="s1">location</span><span class="s2">);</span>
+                    <span class="s1">listingData</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s4">&quot;unitType&quot;</span><span class="s2">, </span><span class="s1">unitType</span><span class="s2">);</span>
+                    <span class="s1">listingData</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s4">&quot;imageUrl&quot;</span><span class="s2">, </span><span class="s1">imageUrl</span><span class="s2">);</span>
+
+                    <span class="s1">db</span><span class="s2">.</span><span class="s1">collection</span><span class="s2">(</span><span class="s4">&quot;listings&quot;</span><span class="s2">)</span>
+                            <span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">listingData</span><span class="s2">)</span>
+                            <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">documentReference -&gt; </span><span class="s2">{</span>
+                                <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s4">&quot;Listing saved successfully.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                                <span class="s1">resetFields</span><span class="s2">();</span>
+                            <span class="s2">})</span>
+                            <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s1">e -&gt;</span>
+                                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s4">&quot;Error saving listing: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">(), </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">()</span>
+                            <span class="s2">);</span>
+                <span class="s2">})</span>
+        <span class="s2">).</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s1">e -&gt;</span>
+                <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">getContext</span><span class="s2">(), </span><span class="s4">&quot;Error uploading image: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">(), </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">()</span>
+        <span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">resetFields</span><span class="s2">() {</span>
+        <span class="s1">editTextDescription</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s4">&quot;&quot;</span><span class="s2">);</span>
+        <span class="s1">editTextPrice</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s4">&quot;&quot;</span><span class="s2">);</span>
+        <span class="s1">editTextContactNumber</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s4">&quot;&quot;</span><span class="s2">);</span>
+        <span class="s1">editTextLocation</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s4">&quot;&quot;</span><span class="s2">);</span>
+        <span class="s1">spinnerUnitType</span><span class="s2">.</span><span class="s1">setSelection</span><span class="s2">(</span><span class="s3">0</span><span class="s2">);</span>
+        <span class="s1">imageViewPicture</span><span class="s2">.</span><span class="s1">setImageResource</span><span class="s2">(</span><span class="s3">0</span><span class="s2">);</span>
+        <span class="s1">imageUri </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private boolean </span><span class="s1">isValidPhilippinePrefix</span><span class="s2">(</span><span class="s1">String cPhone</span><span class="s2">) {</span>
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">validPrefixes </span><span class="s2">= {</span>
+                <span class="s4">&quot;0905&quot;</span><span class="s2">, </span><span class="s4">&quot;0906&quot;</span><span class="s2">, </span><span class="s4">&quot;0907&quot;</span><span class="s2">, </span><span class="s4">&quot;0908&quot;</span><span class="s2">, </span><span class="s4">&quot;0909&quot;</span><span class="s2">, </span><span class="s4">&quot;0910&quot;</span><span class="s2">, </span><span class="s4">&quot;0912&quot;</span><span class="s2">, </span><span class="s4">&quot;0915&quot;</span><span class="s2">, </span><span class="s4">&quot;0916&quot;</span><span class="s2">, </span><span class="s4">&quot;0917&quot;</span><span class="s2">,</span>
+                <span class="s4">&quot;0918&quot;</span><span class="s2">, </span><span class="s4">&quot;0919&quot;</span><span class="s2">, </span><span class="s4">&quot;0920&quot;</span><span class="s2">, </span><span class="s4">&quot;0921&quot;</span><span class="s2">, </span><span class="s4">&quot;0922&quot;</span><span class="s2">, </span><span class="s4">&quot;0923&quot;</span><span class="s2">, </span><span class="s4">&quot;0925&quot;</span><span class="s2">, </span><span class="s4">&quot;0926&quot;</span><span class="s2">, </span><span class="s4">&quot;0927&quot;</span><span class="s2">, </span><span class="s4">&quot;0928&quot;</span><span class="s2">,</span>
+                <span class="s4">&quot;0929&quot;</span><span class="s2">, </span><span class="s4">&quot;0930&quot;</span><span class="s2">, </span><span class="s4">&quot;0935&quot;</span><span class="s2">, </span><span class="s4">&quot;0936&quot;</span><span class="s2">, </span><span class="s4">&quot;0937&quot;</span><span class="s2">, </span><span class="s4">&quot;0938&quot;</span><span class="s2">, </span><span class="s4">&quot;0939&quot;</span><span class="s2">, </span><span class="s4">&quot;0940&quot;</span><span class="s2">, </span><span class="s4">&quot;0942&quot;</span><span class="s2">, </span><span class="s4">&quot;0943&quot;</span><span class="s2">,</span>
+                <span class="s4">&quot;0945&quot;</span><span class="s2">, </span><span class="s4">&quot;0946&quot;</span><span class="s2">, </span><span class="s4">&quot;0947&quot;</span><span class="s2">, </span><span class="s4">&quot;0948&quot;</span><span class="s2">, </span><span class="s4">&quot;0949&quot;</span><span class="s2">, </span><span class="s4">&quot;0950&quot;</span><span class="s2">, </span><span class="s4">&quot;0951&quot;</span><span class="s2">, </span><span class="s4">&quot;0955&quot;</span><span class="s2">, </span><span class="s4">&quot;0956&quot;</span><span class="s2">, </span><span class="s4">&quot;0957&quot;</span><span class="s2">,</span>
+                <span class="s4">&quot;0961&quot;</span><span class="s2">, </span><span class="s4">&quot;0963&quot;</span><span class="s2">, </span><span class="s4">&quot;0965&quot;</span><span class="s2">, </span><span class="s4">&quot;0966&quot;</span><span class="s2">, </span><span class="s4">&quot;0967&quot;</span><span class="s2">, </span><span class="s4">&quot;0970&quot;</span><span class="s2">, </span><span class="s4">&quot;0971&quot;</span><span class="s2">, </span><span class="s4">&quot;0973&quot;</span><span class="s2">, </span><span class="s4">&quot;0974&quot;</span><span class="s2">, </span><span class="s4">&quot;0975&quot;</span><span class="s2">,</span>
+                <span class="s4">&quot;0977&quot;</span><span class="s2">, </span><span class="s4">&quot;0978&quot;</span><span class="s2">, </span><span class="s4">&quot;0979&quot;</span><span class="s2">, </span><span class="s4">&quot;0981&quot;</span><span class="s2">, </span><span class="s4">&quot;0989&quot;</span><span class="s2">, </span><span class="s4">&quot;0991&quot;</span><span class="s2">, </span><span class="s4">&quot;0992&quot;</span><span class="s2">, </span><span class="s4">&quot;0993&quot;</span><span class="s2">, </span><span class="s4">&quot;0994&quot;</span><span class="s2">, </span><span class="s4">&quot;0995&quot;</span><span class="s2">,</span>
+                <span class="s4">&quot;0996&quot;</span><span class="s2">, </span><span class="s4">&quot;0997&quot;</span><span class="s2">, </span><span class="s4">&quot;0998&quot;</span><span class="s2">, </span><span class="s4">&quot;0999&quot;</span>
+        <span class="s2">};</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">String prefix </span><span class="s2">: </span><span class="s1">validPrefixes</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">cPhone</span><span class="s2">.</span><span class="s1">startsWith</span><span class="s2">(</span><span class="s1">prefix</span><span class="s2">)) {</span>
+                <span class="s0">return true</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return false</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

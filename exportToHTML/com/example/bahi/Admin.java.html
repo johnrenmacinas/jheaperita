@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>Admin.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Admin.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">FragmentManager</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">FragmentTransaction</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">.</span><span class="s1">databinding</span><span class="s2">.</span><span class="s1">ActivityAdminBinding</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">bottomnavigation</span><span class="s2">.</span><span class="s1">BottomNavigationView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseAuth</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Admin </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s2">{</span>
+
+    <span class="s1">ActivityAdminBinding binding</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseAuth firebaseAuth</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">binding </span><span class="s2">= </span><span class="s1">ActivityAdminBinding</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">getLayoutInflater</span><span class="s2">());</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">binding</span><span class="s2">.</span><span class="s1">getRoot</span><span class="s2">());</span>
+
+        <span class="s1">showHome_Admin</span><span class="s2">();</span>
+
+        <span class="s3">// Set up navigation item selection listener</span>
+        <span class="s1">binding</span><span class="s2">.</span><span class="s1">bottomNavigationLandlord</span><span class="s2">.</span><span class="s1">setOnItemSelectedListener</span><span class="s2">(</span><span class="s1">item -&gt; </span><span class="s2">{</span>
+            <span class="s3">// Get the ID of the menu item clicked</span>
+            <span class="s0">int </span><span class="s1">itemId </span><span class="s2">= </span><span class="s1">item</span><span class="s2">.</span><span class="s1">getItemId</span><span class="s2">();</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">itemId </span><span class="s2">== </span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">bottom_home_landlord</span><span class="s2">) {</span>
+                <span class="s1">showHome_Admin</span><span class="s2">();</span>
+                <span class="s0">return true</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">itemId </span><span class="s2">== </span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">bottom_listing_landlord</span><span class="s2">) {</span>
+                <span class="s1">showListing</span><span class="s2">();</span>
+                <span class="s0">return true</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">itemId </span><span class="s2">== </span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">bottom_profile_landlord</span><span class="s2">) {</span>
+                <span class="s1">showProfile</span><span class="s2">();</span>
+                <span class="s0">return true</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">itemId </span><span class="s2">== </span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">bottom_menu_landlord</span><span class="s2">) {</span>
+                <span class="s1">shoMenu</span><span class="s2">();</span>
+                <span class="s0">return true</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">return false</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showHome_Admin</span><span class="s2">() {</span>
+
+        <span class="s1">Home_Admin fragment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Home_Admin</span><span class="s2">();</span>
+        <span class="s1">FragmentTransaction fragmentTransaction </span><span class="s2">= </span><span class="s1">getSupportFragmentManager</span><span class="s2">().</span><span class="s1">beginTransaction</span><span class="s2">();</span>
+        <span class="s1">fragmentTransaction</span><span class="s2">.</span><span class="s1">replace</span><span class="s2">(</span><span class="s1">binding</span><span class="s2">.</span><span class="s1">fragmentContainerView2</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">(), </span><span class="s1">fragment</span><span class="s2">, </span><span class="s4">&quot;Home_Admin&quot;</span><span class="s2">);</span>
+        <span class="s1">fragmentTransaction</span><span class="s2">.</span><span class="s1">commit</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showListing</span><span class="s2">() {</span>
+
+        <span class="s1">Listing fragment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Listing</span><span class="s2">();</span>
+        <span class="s1">FragmentTransaction fragmentTransaction </span><span class="s2">= </span><span class="s1">getSupportFragmentManager</span><span class="s2">().</span><span class="s1">beginTransaction</span><span class="s2">();</span>
+        <span class="s1">fragmentTransaction</span><span class="s2">.</span><span class="s1">replace</span><span class="s2">(</span><span class="s1">binding</span><span class="s2">.</span><span class="s1">fragmentContainerView2</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">(), </span><span class="s1">fragment</span><span class="s2">, </span><span class="s4">&quot;Listing&quot;</span><span class="s2">);</span>
+        <span class="s1">fragmentTransaction</span><span class="s2">.</span><span class="s1">commit</span><span class="s2">();</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showProfile</span><span class="s2">() {</span>
+
+        <span class="s1">Profile fragment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Profile</span><span class="s2">();</span>
+        <span class="s1">FragmentTransaction fragmentTransaction </span><span class="s2">= </span><span class="s1">getSupportFragmentManager</span><span class="s2">().</span><span class="s1">beginTransaction</span><span class="s2">();</span>
+        <span class="s1">fragmentTransaction</span><span class="s2">.</span><span class="s1">replace</span><span class="s2">(</span><span class="s1">binding</span><span class="s2">.</span><span class="s1">fragmentContainerView2</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">(), </span><span class="s1">fragment</span><span class="s2">, </span><span class="s4">&quot;Profile&quot;</span><span class="s2">);</span>
+        <span class="s1">fragmentTransaction</span><span class="s2">.</span><span class="s1">commit</span><span class="s2">();</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">shoMenu</span><span class="s2">() {</span>
+
+        <span class="s1">Menu_Landlord fragment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Menu_Landlord</span><span class="s2">();</span>
+        <span class="s1">FragmentTransaction fragmentTransaction </span><span class="s2">= </span><span class="s1">getSupportFragmentManager</span><span class="s2">().</span><span class="s1">beginTransaction</span><span class="s2">();</span>
+        <span class="s1">fragmentTransaction</span><span class="s2">.</span><span class="s1">replace</span><span class="s2">(</span><span class="s1">binding</span><span class="s2">.</span><span class="s1">fragmentContainerView2</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">(), </span><span class="s1">fragment</span><span class="s2">, </span><span class="s4">&quot;Menu_Landlord&quot;</span><span class="s2">);</span>
+        <span class="s1">fragmentTransaction</span><span class="s2">.</span><span class="s1">commit</span><span class="s2">();</span>
+
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+
+
+</pre>
+</body>
+</html>

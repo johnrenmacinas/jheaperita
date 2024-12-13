@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Terms_Conditions.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Terms_Conditions.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">InputStream</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Terms_Conditions </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s2">{</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_terms_conditions</span><span class="s2">);</span>
+
+        <span class="s3">// Initialize the TextView</span>
+        <span class="s1">TextView textView </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">termsConditions</span><span class="s2">);</span>
+
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s3">// Open the text file from the assets folder</span>
+            <span class="s1">InputStream inputStream </span><span class="s2">= </span><span class="s1">getAssets</span><span class="s2">().</span><span class="s1">open</span><span class="s2">(</span><span class="s4">&quot;terms_and_conditions.txt&quot;</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">size </span><span class="s2">= </span><span class="s1">inputStream</span><span class="s2">.</span><span class="s1">available</span><span class="s2">();</span>
+            <span class="s0">byte</span><span class="s2">[] </span><span class="s1">buffer </span><span class="s2">= </span><span class="s0">new byte</span><span class="s2">[</span><span class="s1">size</span><span class="s2">];</span>
+            <span class="s1">inputStream</span><span class="s2">.</span><span class="s1">read</span><span class="s2">(</span><span class="s1">buffer</span><span class="s2">);</span>
+            <span class="s1">inputStream</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+
+            <span class="s3">// Convert the buffer into a String and set it to the TextView</span>
+            <span class="s1">String longText </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">(</span><span class="s1">buffer</span><span class="s2">, </span><span class="s4">&quot;UTF-8&quot;</span><span class="s2">);</span>
+            <span class="s1">textView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">longText</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

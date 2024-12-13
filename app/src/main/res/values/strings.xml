@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">BaHi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="faQ1">BaHi is a platform where landlords and property managers can list their rental properties, and renters can search for their ideal home based on location, price, and preferences.</string>
+
+    <string name="faQ2">Click on the "Sign Up" button below "LOG IN" on the app landing page and follow the instructions to create an account.</string>
+    <string name="faQ3">Yes, creating an account and browsing listings is free. However, some premium features (e.g., promoted listings or advanced search filters) may require a subscription.</string>
+    <string name="faQ4">Use the search bar to enter your preferred location and apply filters such as price range, number of bedrooms, and property type to narrow your results.</string>
+    <string name="faQ5">Yes, you can contact the property owner or manager directly through the "Schedule Viewing" button on the property’s page.</string>
+    <string name="faQ6">The listing will show the current availability status. You can also message the property owner for confirmation.</string>
+    <string name="faQ7">We encourage property owners to provide accurate information and documentation. </string>
+    <string name="faQ8">Log in to your account, go to the "Listing" section, and fill in the required details about your property, including photos and descriptions.</string>
+    <string name="faQ9">Listing a property is free. </string>
+    <string name="faQ10">Yes, you can edit your listing anytime through your account dashboard.</string>
+    <string name="faQ11">No, BaHi is merely a platform to post and look for accommodations. Payment methods depend on the property owner’s preferences.</string>
+    <string name="faQ12">Some properties may have additional charges for utilities, maintenance, or other services. Always check the listing details or confirm with the landlord.</string>
+    <string name="faQ13">Click on the "Recover Account" link on the login page and follow the instructions to reset your password.</string>
+    <string name="faQ14">Visit our Help Center or contact our support team via BaHiHouseRental@gmail.com.</string>
+    <string name="faQ15">1. Always verify the property in person before making payments. \n2. Avoid sending money to landlords without a signed rental agreement. \n3. Report suspicious listings to our support team.</string>
+    <string name="faQ16">Yes, we take data privacy seriously and use encryption to protect your information. For details, see our Privacy Policy.</string>
+
+</resources>

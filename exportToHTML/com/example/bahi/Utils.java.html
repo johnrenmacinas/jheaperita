@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Utils.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Utils.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">format</span><span class="s2">.</span><span class="s1">DateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Toast</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Calendar</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Locale</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Utils </span><span class="s2">{</span>
+
+    <span class="s3">// Static method to show a toast message</span>
+    <span class="s0">public static void </span><span class="s1">toast</span><span class="s2">(</span><span class="s1">Context context</span><span class="s2">, </span><span class="s1">String message</span><span class="s2">) {</span>
+        <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s1">message</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static long </span><span class="s1">getTimeStamp</span><span class="s2">(){</span>
+        <span class="s0">return </span><span class="s1">System</span><span class="s2">.</span><span class="s1">currentTimeMillis</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">String formatTimestampDate</span><span class="s2">(</span><span class="s1">Long timestamp</span><span class="s2">){</span>
+        <span class="s1">Calendar calendar </span><span class="s2">= </span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">(</span><span class="s1">Locale</span><span class="s2">.</span><span class="s1">ENGLISH</span><span class="s2">);</span>
+        <span class="s1">calendar</span><span class="s2">.</span><span class="s1">setTimeInMillis</span><span class="s2">(</span><span class="s1">timestamp</span><span class="s2">);</span>
+
+        <span class="s1">String date </span><span class="s2">= </span><span class="s1">DateFormat</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s4">&quot;dd/MM/yyyy&quot;</span><span class="s2">, </span><span class="s1">calendar</span><span class="s2">).</span><span class="s1">toString</span><span class="s2">();</span>
+
+        <span class="s0">return </span><span class="s1">date</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

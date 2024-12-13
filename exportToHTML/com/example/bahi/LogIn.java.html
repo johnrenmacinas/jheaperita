@@ -1,0 +1,209 @@
+<html>
+<head>
+<title>LogIn.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LogIn.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bahi</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AlertDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">DialogInterface</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Toast</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">OnFailureListener</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">OnSuccessListener</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">AuthResult</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseAuth</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseAuthInvalidCredentialsException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseAuthInvalidUserException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">auth</span><span class="s2">.</span><span class="s1">FirebaseUser</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DataSnapshot</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DatabaseReference</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">firebase</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">FirebaseDatabase</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">textfield</span><span class="s2">.</span><span class="s1">TextInputEditText</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">LogIn </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s2">{</span>
+    <span class="s1">TextInputEditText email</span><span class="s2">, </span><span class="s1">password</span><span class="s2">;</span>
+    <span class="s1">Button loginClick</span><span class="s2">;</span>
+    <span class="s1">TextView gotoRegister</span><span class="s2">, </span><span class="s1">gotoRecoverAcc</span><span class="s2">;</span>
+    <span class="s1">FirebaseAuth fAuth</span><span class="s2">;</span>
+    <span class="s1">DatabaseReference dbRef</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_log_in</span><span class="s2">);</span>
+
+        <span class="s1">fAuth </span><span class="s2">= </span><span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s1">dbRef </span><span class="s2">= </span><span class="s1">FirebaseDatabase</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getReference</span><span class="s2">();</span>
+
+        <span class="s3">// Initialize UI elements</span>
+        <span class="s1">email </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">logInEmailInput</span><span class="s2">);</span>
+        <span class="s1">password </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">logInPasswordInput</span><span class="s2">);</span>
+        <span class="s1">loginClick </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">logIn_Click</span><span class="s2">);</span>
+        <span class="s1">gotoRegister </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">gotoRegister</span><span class="s2">);</span>
+        <span class="s1">gotoRecoverAcc </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">gotoRecover</span><span class="s2">);</span>
+
+        <span class="s1">loginClick</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">View</span><span class="s2">.</span><span class="s1">OnClickListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick</span><span class="s2">(</span><span class="s1">View view</span><span class="s2">) {</span>
+                <span class="s1">String login_email </span><span class="s2">= </span><span class="s1">email</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+                <span class="s1">String login_pass </span><span class="s2">= </span><span class="s1">password</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+
+                <span class="s3">// Validate email and password fields</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">login_email</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                    <span class="s1">email</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s4">&quot;Please enter your email&quot;</span><span class="s2">);</span>
+                    <span class="s1">email</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+                    <span class="s0">return</span><span class="s2">;</span>
+                <span class="s2">}</span>
+
+                <span class="s0">if </span><span class="s2">(!</span><span class="s1">login_email</span><span class="s2">.</span><span class="s1">matches</span><span class="s2">(</span><span class="s4">&quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+</span><span class="s0">\\</span><span class="s4">.(com|org|net|edu|gov)$&quot;</span><span class="s2">)) {</span>
+                    <span class="s1">email</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s4">&quot;Enter a valid email address&quot;</span><span class="s2">);</span>
+                    <span class="s1">email</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+                    <span class="s0">return</span><span class="s2">;</span>
+                <span class="s2">}</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">login_pass</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                    <span class="s1">password</span><span class="s2">.</span><span class="s1">setError</span><span class="s2">(</span><span class="s4">&quot;Please enter your password&quot;</span><span class="s2">);</span>
+                    <span class="s1">password</span><span class="s2">.</span><span class="s1">requestFocus</span><span class="s2">();</span>
+                    <span class="s0">return</span><span class="s2">;</span>
+                <span class="s2">}</span>
+
+                <span class="s3">// Proceed with Firebase Authentication</span>
+                <span class="s1">fAuth</span><span class="s2">.</span><span class="s1">signInWithEmailAndPassword</span><span class="s2">(</span><span class="s1">login_email</span><span class="s2">, </span><span class="s1">login_pass</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">OnSuccessListener</span><span class="s2">&lt;</span><span class="s1">AuthResult</span><span class="s2">&gt;() {</span>
+                            <span class="s1">@Override</span>
+                            <span class="s0">public void </span><span class="s1">onSuccess</span><span class="s2">(</span><span class="s1">AuthResult authResult</span><span class="s2">) {</span>
+                                <span class="s1">FirebaseUser firebaseUser </span><span class="s2">= </span><span class="s1">fAuth</span><span class="s2">.</span><span class="s1">getCurrentUser</span><span class="s2">();</span>
+
+                                <span class="s3">// Check if email is verified before user can access their profile</span>
+                                <span class="s0">if </span><span class="s2">(</span><span class="s1">firebaseUser </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">firebaseUser</span><span class="s2">.</span><span class="s1">isEmailVerified</span><span class="s2">()) {</span>
+                                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;Logged in Successfully&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                                    <span class="s1">checkUserAccessLevel</span><span class="s2">(</span><span class="s1">authResult</span><span class="s2">.</span><span class="s1">getUser</span><span class="s2">().</span><span class="s1">getUid</span><span class="s2">());</span>
+                                <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">firebaseUser </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                                    <span class="s1">firebaseUser</span><span class="s2">.</span><span class="s1">sendEmailVerification</span><span class="s2">();</span>
+                                    <span class="s1">fAuth</span><span class="s2">.</span><span class="s1">signOut</span><span class="s2">();</span>
+                                    <span class="s1">showAlertDialog</span><span class="s2">();</span>
+                                <span class="s2">}</span>
+                            <span class="s2">}</span>
+                        <span class="s2">})</span>
+                        <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">OnFailureListener</span><span class="s2">() {</span>
+                            <span class="s1">@Override</span>
+                            <span class="s0">public void </span><span class="s1">onFailure</span><span class="s2">(</span><span class="s1">@NonNull Exception e</span><span class="s2">) {</span>
+                                <span class="s3">// Handle specific Firebase errors</span>
+                                <span class="s0">if </span><span class="s2">(</span><span class="s1">e </span><span class="s0">instanceof </span><span class="s1">FirebaseAuthInvalidCredentialsException</span><span class="s2">) {</span>
+                                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;Incorrect username or password.&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                                <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">e </span><span class="s0">instanceof </span><span class="s1">FirebaseAuthInvalidUserException</span><span class="s2">) {</span>
+                                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;No account found with this email&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                                <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;Authentication failed: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">(), </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                                <span class="s2">}</span>
+                            <span class="s2">}</span>
+                        <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">gotoRegister</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">view -&gt; startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">getApplicationContext</span><span class="s2">(), </span><span class="s1">Register</span><span class="s2">.</span><span class="s0">class</span><span class="s2">)));</span>
+        <span class="s1">gotoRecoverAcc</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">view -&gt; startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">getApplicationContext</span><span class="s2">(), </span><span class="s1">Recover_Acc</span><span class="s2">.</span><span class="s0">class</span><span class="s2">)));</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showAlertDialog</span><span class="s2">() {</span>
+        <span class="s1">AlertDialog</span><span class="s2">.</span><span class="s1">Builder builder </span><span class="s2">= </span><span class="s0">new </span><span class="s1">AlertDialog</span><span class="s2">.</span><span class="s1">Builder</span><span class="s2">(</span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">this</span><span class="s2">);</span>
+        <span class="s1">builder</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s4">&quot;Email Not Verified&quot;</span><span class="s2">);</span>
+        <span class="s1">builder</span><span class="s2">.</span><span class="s1">setMessage</span><span class="s2">(</span><span class="s4">&quot;Please verify your email now. You cannot log in without email verification.&quot;</span><span class="s2">);</span>
+        <span class="s1">builder</span><span class="s2">.</span><span class="s1">setPositiveButton</span><span class="s2">(</span><span class="s4">&quot;Continue&quot;</span><span class="s2">, (</span><span class="s1">dialog</span><span class="s2">, </span><span class="s1">which</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">Intent intent </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">ACTION_MAIN</span><span class="s2">);</span>
+            <span class="s1">intent</span><span class="s2">.</span><span class="s1">addCategory</span><span class="s2">(</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">CATEGORY_APP_EMAIL</span><span class="s2">);</span>
+            <span class="s1">intent</span><span class="s2">.</span><span class="s1">addFlags</span><span class="s2">(</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">FLAG_ACTIVITY_NEW_TASK</span><span class="s2">);</span>
+            <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">builder</span><span class="s2">.</span><span class="s1">create</span><span class="s2">().</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">checkUserAccessLevel</span><span class="s2">(</span><span class="s1">String uid</span><span class="s2">) {</span>
+        <span class="s3">// Fetch account type from Realtime Database</span>
+        <span class="s1">dbRef</span><span class="s2">.</span><span class="s1">child</span><span class="s2">(</span><span class="s4">&quot;Users&quot;</span><span class="s2">).</span><span class="s1">child</span><span class="s2">(</span><span class="s4">&quot;AccountType&quot;</span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">get</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">OnSuccessListener</span><span class="s2">&lt;</span><span class="s1">DataSnapshot</span><span class="s2">&gt;() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onSuccess</span><span class="s2">(</span><span class="s1">DataSnapshot dataSnapshot</span><span class="s2">) {</span>
+                        <span class="s0">if </span><span class="s2">(</span><span class="s1">dataSnapshot</span><span class="s2">.</span><span class="s1">exists</span><span class="s2">()) {</span>
+                            <span class="s1">String accountType </span><span class="s2">= </span><span class="s1">dataSnapshot</span><span class="s2">.</span><span class="s1">getValue</span><span class="s2">(</span><span class="s1">String</span><span class="s2">.</span><span class="s0">class</span><span class="s2">);</span>
+
+                            <span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;Landlord&quot;</span><span class="s2">.</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s1">accountType</span><span class="s2">)) {</span>
+                                <span class="s1">startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">getApplicationContext</span><span class="s2">(), </span><span class="s1">Admin</span><span class="s2">.</span><span class="s0">class</span><span class="s2">));</span>
+                                <span class="s1">finish</span><span class="s2">();</span>
+                            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s4">&quot;Tenant&quot;</span><span class="s2">.</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s1">accountType</span><span class="s2">)) {</span>
+                                <span class="s1">startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">getApplicationContext</span><span class="s2">(), </span><span class="s1">MainActivity</span><span class="s2">.</span><span class="s0">class</span><span class="s2">));</span>
+                                <span class="s1">finish</span><span class="s2">();</span>
+                            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                                <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;Unknown account type&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                            <span class="s2">}</span>
+                        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                            <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;User data not found&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                        <span class="s2">}</span>
+                    <span class="s2">}</span>
+                <span class="s2">})</span>
+                <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s1">e -&gt; </span><span class="s2">{</span>
+                    <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s4">&quot;TAG&quot;</span><span class="s2">, </span><span class="s4">&quot;Failed to fetch user data: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+                    <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;Error fetching user details&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">();</span>
+                <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onStart</span><span class="s2">() {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onStart</span><span class="s2">();</span>
+
+        <span class="s3">// Log out any currently signed-in user</span>
+        <span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">signOut</span><span class="s2">();</span>
+
+        <span class="s3">// Remove this block to avoid automatic redirection</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getCurrentUser</span><span class="s2">() != </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">String uid </span><span class="s2">= </span><span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">getCurrentUser</span><span class="s2">().</span><span class="s1">getUid</span><span class="s2">();</span>
+            <span class="s1">dbRef</span><span class="s2">.</span><span class="s1">child</span><span class="s2">(</span><span class="s4">&quot;Users&quot;</span><span class="s2">).</span><span class="s1">child</span><span class="s2">(</span><span class="s4">&quot;AccountType&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">get</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">addOnSuccessListener</span><span class="s2">(</span><span class="s1">dataSnapshot -&gt; </span><span class="s2">{</span>
+                        <span class="s0">if </span><span class="s2">(</span><span class="s1">dataSnapshot</span><span class="s2">.</span><span class="s1">exists</span><span class="s2">()) {</span>
+                            <span class="s1">String accountType </span><span class="s2">= </span><span class="s1">dataSnapshot</span><span class="s2">.</span><span class="s1">getValue</span><span class="s2">(</span><span class="s1">String</span><span class="s2">.</span><span class="s0">class</span><span class="s2">);</span>
+                            <span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;Landlord&quot;</span><span class="s2">.</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s1">accountType</span><span class="s2">)) {</span>
+                                <span class="s1">startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">getApplicationContext</span><span class="s2">(), </span><span class="s1">Admin</span><span class="s2">.</span><span class="s0">class</span><span class="s2">));</span>
+                                <span class="s1">finish</span><span class="s2">();</span>
+                            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s4">&quot;Tenant&quot;</span><span class="s2">.</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s1">accountType</span><span class="s2">)) {</span>
+                                <span class="s1">startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">getApplicationContext</span><span class="s2">(), </span><span class="s1">MainActivity</span><span class="s2">.</span><span class="s0">class</span><span class="s2">));</span>
+                                <span class="s1">finish</span><span class="s2">();</span>
+                            <span class="s2">}</span>
+                        <span class="s2">}</span>
+                    <span class="s2">})</span>
+                    <span class="s2">.</span><span class="s1">addOnFailureListener</span><span class="s2">(</span><span class="s1">e -&gt; </span><span class="s2">{</span>
+                        <span class="s1">FirebaseAuth</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">signOut</span><span class="s2">();</span>
+                        <span class="s1">startActivity</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">getApplicationContext</span><span class="s2">(), </span><span class="s1">LogIn</span><span class="s2">.</span><span class="s0">class</span><span class="s2">));</span>
+                        <span class="s1">finish</span><span class="s2">();</span>
+                    <span class="s2">});</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
