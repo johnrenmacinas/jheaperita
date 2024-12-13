@@ -55,6 +55,7 @@ public class Condo extends AppCompatActivity {
                             String contactNumber = document.getString("contactNumber");
                             String location = document.getString("location");
                             String imageUrl = document.getString("imageUrl");
+                            //ang pogi ko
 
                             Listings condo = new Listings(id, description, price, contactNumber, location, imageUrl);
                             condoList.add(condo);
