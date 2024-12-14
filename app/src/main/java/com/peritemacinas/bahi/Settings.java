@@ -40,7 +40,7 @@ public class Settings extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //change password
+        //change
         TextView changePasswordText = findViewById(R.id.password_click);
         changePasswordText.setOnClickListener(new View.OnClickListener() {
             @Override

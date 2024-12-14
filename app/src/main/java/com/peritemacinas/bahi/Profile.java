@@ -112,7 +112,7 @@ public class Profile extends Fragment {
                            Log.e(TAG, "onDataChange: ", e);
                        }
                     }
-
+                    //deleted two set of code for git hub
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
