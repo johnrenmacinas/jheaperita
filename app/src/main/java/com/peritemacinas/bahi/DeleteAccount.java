@@ -149,7 +149,7 @@ public class DeleteAccount extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, LogIn.class));
+        startActivity(new Intent(this, Settings.class));
         finishAffinity();
     }
 }

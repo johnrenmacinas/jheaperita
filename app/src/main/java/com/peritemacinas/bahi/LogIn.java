@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,32 +46,35 @@ public class LogIn extends AppCompatActivity {
         gotoRecoverAcc = findViewById(R.id.gotoRecover);
 
         loginClick.setOnClickListener(view -> {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
             String loginEmail = email.getText().toString().trim();
             String loginPassword = password.getText().toString().trim();
 
-            // Validate email and password fields
-            if (!validateInputs(loginEmail, loginPassword)) return;
 
-            // Check user existence in database
-            dbRef.orderByChild("email").equalTo(loginEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                            String userId = userSnapshot.getKey();
-                            checkUserAccessLevel(userId);
+            if (loginEmail.isEmpty()) {
+                Toast.makeText(LogIn.this, "Please enter your email", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (loginPassword.isEmpty()) {
+                Toast.makeText(LogIn.this, "Please enter your password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            mAuth.signInWithEmailAndPassword(loginEmail, loginPassword)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null) {
+                                String userId = user.getUid();
+                                checkUserAccessLevel(userId);
+                            }
+                        } else {
+                            // Authentication failed
+                            Toast.makeText(LogIn.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(LogIn.this, "User not found", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                    });
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("FirebaseError", "Database error: " + error.getMessage());
-                    Toast.makeText(LogIn.this, "Database error occurred", Toast.LENGTH_SHORT).show();
-                }
-            });
         });
 
         gotoRegister.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), Register.class)));
