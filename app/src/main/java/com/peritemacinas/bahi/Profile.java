@@ -56,20 +56,6 @@ public class Profile extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //Delete Account
-        binding.deleteAccountCv.setOnClickListener(v -> {
-            startActivity(new Intent(requireContext(), DeleteAccount.class));
-            requireActivity().finishAffinity();
-        });
-
-        // Change Password
-        binding.changePasswordCv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(mContext,ChangePasswordActivity.class));
-            }
-        });
-
         loadMyInfo();
     }
 
