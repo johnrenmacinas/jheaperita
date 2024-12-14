@@ -15,7 +15,7 @@ android {
         applicationId = "com.peritemacinas.bahi"
         minSdk = 27
         targetSdk = 34
-        versionCode = 1
+        versionCode = 13
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

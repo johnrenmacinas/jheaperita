@@ -32,6 +32,7 @@ public class Profile extends Fragment {
     private FirebaseAuth firebaseAuth;
 
     private Context mContext;
+    private String uid;
 
 
     @Override
@@ -44,7 +45,7 @@ public class Profile extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Use the provided LayoutInflater to initialize the binding
         binding = FragmentProfileBinding.inflate(LayoutInflater.from(mContext), container, false);
-
+        uid = getArguments().getString("uid");
         // Return the root view of the binding
         return binding.getRoot();
     }
@@ -74,7 +75,7 @@ public class Profile extends Fragment {
 
     private void loadMyInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-        ref.child(firebaseAuth.getUid())
+        ref.child(uid)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

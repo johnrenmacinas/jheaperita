@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:541743447726:android:e22264ad58bd8973cdb73f",
         "android_client_info": {
-          "package_name": "com.example.bahi"
+          "package_name": "com.peritemacinas.bahi"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "541743447726-hg4ptioqg9telmce3e15j9972pgoor70.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.bahi",
+            "package_name": "com.peritemacinas.bahi",
             "certificate_hash": "06bb7cb5a7e1d1dc950f2e22f6a065f21c05aaff"
           }
         },

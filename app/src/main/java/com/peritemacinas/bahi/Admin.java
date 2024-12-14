@@ -19,14 +19,16 @@ public class Admin extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         String accountType = getIntent().getStringExtra("accountType");
+        String uid = getIntent().getStringExtra("uid");
 
         Bundle bundle = new Bundle();
         bundle.putString("accountType", accountType);
+        bundle.putString("uid", uid);
 
         Home_Bottom homeBottomFragment = new Home_Bottom();
         homeBottomFragment.setArguments(bundle);
 
-        replaceFragment(homeBottomFragment);
+        replaceFragment(homeBottomFragment, bundle);
 
         binding.bottomNavigationLandlord.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
@@ -43,14 +45,15 @@ public class Admin extends AppCompatActivity {
             }
 
             if (selectedFragment != null) {
-                replaceFragment(selectedFragment);
+                replaceFragment(selectedFragment, bundle);
             }
 
             return true;
         });
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, Bundle bundle) {
+        fragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView2, fragment);
