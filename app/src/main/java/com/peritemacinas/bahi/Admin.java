@@ -47,7 +47,7 @@ public class Admin extends AppCompatActivity {
             if (selectedFragment != null) {
                 replaceFragment(selectedFragment, bundle);
             }
-
+            //eme
             return true;
         });
     }
